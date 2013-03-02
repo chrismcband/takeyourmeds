@@ -11,5 +11,12 @@ exports.get = function(req, res){
 };
 
 exports.post = function(req, res) {
-    console.log(req);
+    var patient = new db.Patient(req.body);
+
+    patient.save(function(err, p){
+        if (err){
+            console.log("Unable to save patient");
+        }
+        res.send(p);
+    });
 };

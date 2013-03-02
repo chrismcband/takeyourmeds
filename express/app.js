@@ -104,7 +104,9 @@ app.get('/login', login.index);
 app.post('/login', login.post);
 app.get('/users', user.list);
 app.get('/patients', patients.get);
+app.post('/patients', patients.post);
 app.get('/drugs', drugs.get);
+app.post('/drugs', drugs.post);
 
 app.get('/reminder', reminder.index);
 app.post('/reminder', reminder.index);

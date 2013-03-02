@@ -11,5 +11,12 @@ exports.get = function(req, res){
 };
 
 exports.post = function(req, res) {
-    console.log(req);
+    var drug = new db.Drug(req.body);
+
+    drug.save(function(err, d){
+        if (err){
+            console.log("Unable to save drug");
+        }
+        res.send(d);
+    });
 };

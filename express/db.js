@@ -4,7 +4,8 @@ mongoose.connect('localhost', 'test');
 var drugSchema = mongoose.Schema({
     name: 'string',
     description: 'string',
-    dosageInMG: 'number'
+    dosageInMG: 'number',
+    type: 'string'
 });
 
 var patientSchema = mongoose.Schema({

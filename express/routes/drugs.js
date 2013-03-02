@@ -2,11 +2,11 @@ var db = require('./../db');
 
 
 exports.get = function(req, res){
-    db.Patient.find(function (err, patients) {
+    db.Drug.find(function (err, drugs) {
         if (err) {
-          console.log("error finding patients "+err);
+          console.log("error finding drugs "+err);
         }
-        res.send(patients);
+        res.send(drugs);
     });
 };
 

@@ -10,6 +10,7 @@ var express = require('express')
   , login = require('./routes/login')
   , reminder = require('./routes/reminder')
   , patients = require('./routes/patients')
+  , drugs = require('./routes/drugs')
   , http = require('http')
   , path = require('path')
   , port = 8080
@@ -51,11 +52,50 @@ app.configure('development', function(){
 //    phone2: '+447723072947'
 //});
 
-
-
 //patient1.save(function(err){
 //    if (err){
 //        console.log('Unable to save patient1');
+//    }
+//});
+
+//var db = require('./db');
+//
+//var Drug = db.Drug;
+//
+//var drug1 = new Drug({
+//    name: 'Candesartan',
+//    description: 'Angiotensin receptor blocker',
+//    dosageInMG: '500',
+//    type: 'pill'
+//});
+//
+//drug1.save(function(err, drug){
+//    if (err){
+//        console.log("Unable to save drug 1");
+//    }
+//});
+
+//var drug2 = new Drug({
+//    name: 'Lansoprazole',
+//    description: 'Proton-pump inhibitor',
+//    dosageInMG: '30',
+//    type: 'pill'
+//});
+//drug2.save(function(err, drug){
+//    if (err){
+//        console.log("Unable to save drug 2");
+//    }
+//});
+//
+//var drug3 = new Drug({
+//    name: 'Metformin',
+//    description: 'Blood glucose regulator',
+//    dosageInMG: '500',
+//    type: 'pill'
+//});
+//drug3.save(function(err, drug){
+//    if (err){
+//        console.log("Unable to save drug 3");
 //    }
 //});
 
@@ -64,6 +104,7 @@ app.get('/login', login.index);
 app.post('/login', login.post);
 app.get('/users', user.list);
 app.get('/patients', patients.get);
+app.get('/drugs', drugs.get);
 
 app.get('/reminder', reminder.index);
 app.post('/reminder', reminder.index);

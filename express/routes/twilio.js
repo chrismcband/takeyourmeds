@@ -9,6 +9,8 @@ exports.post = function(req, res) {
     var firstname = req.body.firstname;
     var numPills = req.body.numpills;
 
+
+
     client.makeCall({
             to:'+447723072947', // Any number Twilio can call
             from: '+441290211634', // A number you bought from Twilio and can use for outbound communication
@@ -20,5 +22,7 @@ exports.post = function(req, res) {
 
         //executed when the call has been initiated.
         console.log(responseData.from); // outputs "+14506667788"
+        res.setHeader('Location', '/');
+        res.end();
     });
 };

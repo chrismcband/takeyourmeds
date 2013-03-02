@@ -42,7 +42,6 @@ app.configure('development', function(){
   app.use(express.errorHandler());
 });
 
-app.get('/', routes.index);
 app.get('/login', login.index);
 app.post('/login', login.post);
 app.get('/patients', patients.get);

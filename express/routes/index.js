@@ -4,5 +4,6 @@
  */
 
 exports.index = function(req, res){
-  res.render('index', { title: 'Express' });
+    req.session.data = {"test": "test session data"};
+    res.render('index', { title: 'Express' });
 };

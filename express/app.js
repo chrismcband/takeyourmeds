@@ -7,7 +7,9 @@
 var express = require('express')
   , routes = require('./routes')
   , user = require('./routes/user')
+  , login = require('./routes/login')
   , reminder = require('./routes/reminder')
+  , patients = require('./routes/patients')
   , http = require('http')
   , path = require('path')
   , port = 8080
@@ -17,7 +19,7 @@ var express = require('express')
 if(process.env.SUBDOMAIN){
   url = 'http://' + process.env.SUBDOMAIN + '.jit.su/';
 }
-
+store  = new express.session.MemoryStore;
 var app = express();
 
 app.configure(function(){
@@ -38,8 +40,30 @@ app.configure('development', function(){
   app.use(express.errorHandler());
 });
 
+
+
+//var patient1 = new Patient({
+//    firstname: "Jeff",
+//    lastname: "Smith",
+//    dob: 0,
+//    gender: 'male',
+//    phone1: '+447723072947',
+//    phone2: '+447723072947'
+//});
+
+
+
+//patient1.save(function(err){
+//    if (err){
+//        console.log('Unable to save patient1');
+//    }
+//});
+
 app.get('/', routes.index);
+app.get('/login', login.index);
+app.post('/login', login.post);
 app.get('/users', user.list);
+app.get('/patients', patients.get);
 
 app.get('/reminder', reminder.index);
 app.post('/reminder', reminder.index);

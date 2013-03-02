@@ -48,9 +48,11 @@ app.get('/users', user.list);
 app.get('/patients', patients.get);
 app.get('/patients/:id', patients.getOne);
 app.post('/patients', patients.post);
+app.put('/patients/:id', patients.put);
 app.get('/drugs', drugs.get);
 app.get('/drugs/:id', drugs.getOne);
 app.post('/drugs', drugs.post);
+app.put('/drugs/:id', drugs.put);
 
 app.get('/reminder', reminder.index);
 app.post('/reminder', reminder.index);

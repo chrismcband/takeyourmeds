@@ -31,3 +31,28 @@ exports.post = function(req, res) {
         res.send(d);
     });
 };
+
+exports.put = function(req, res) {
+    var id = req.params.id;
+
+    var changes = {};
+    if (req.body.name) {
+        changes.name = req.body.name;
+    }
+    if (req.body.description) {
+        changes.description = req.body.description;
+    }
+    if (req.body.dosageInMG) {
+        changes.dosageInMG = req.body.dosageInMG;
+    }
+    if (req.body.type) {
+        changes.type = req.body.type;
+    }
+
+    db.Drug.findOneAndUpdate({_id: id}, changes, function(err, drug){
+        if (err){
+            console.log("Unable to update drug");
+        }
+        res.send(drug);
+    });
+};

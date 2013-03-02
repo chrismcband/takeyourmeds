@@ -10,6 +10,17 @@ exports.get = function(req, res){
     });
 };
 
+exports.getOne = function(req, res){
+    var id = req.params.id;
+
+    db.Patient.findOne({_id: id}, function(err, patient){
+        if (err){
+            console.log("Unable to find patient "+id);
+        }
+        res.send(patient);
+    });
+};
+
 exports.post = function(req, res) {
     var patient = new db.Patient(req.body);
 

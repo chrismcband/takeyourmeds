@@ -104,7 +104,26 @@
                     <!--<p><a class="btn" href="#">View details &raquo;</a></p>-->
                <!--</div>-->
             </div>
+    <!--
     <form action="http://chrismcband.lwshackday.nodejitsu.com/twilio" method="post">
+        <button type="submit">Remind Me</button>
+    </form>
+    -->
+
+    <script type="text/javascript">
+        $(function(){
+            $("form#twilioForm").submit(function(){
+
+                $.ajax("http://chrismcband.lwshackday.nodejitsu.com/twilio", {
+                    type: "POST"
+                });
+
+                return false;
+            });
+        });
+    </script>
+
+    <form id="twilioForm" action="http://localhost:8080/twilio" method="post">
         <button type="submit">Remind Me</button>
     </form>
 

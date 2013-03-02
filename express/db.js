@@ -14,11 +14,30 @@ var patientSchema = mongoose.Schema({
     dob: 'number',
     gender: 'string',
     phone1: 'string',
-    phone2: 'string'
+    phone2: 'string',
+    courses: 'array'
+});
+
+var userSchema = mongoose.Schema({
+    email: 'string',
+    password: 'string',
+    patientid: 'string'
+});
+
+var courseSchema = mongoose.Schema({
+    drug: mongoose.Schema.Types.Mixed,
+    quantity: 'number',
+    dosagetimes: 'array',
+    startdate: 'number',
+    enddate: 'number'
 });
 
 var Drug = mongoose.model('Drug', drugSchema);
 var Patient = mongoose.model('Patient', patientSchema);
+var User = mongoose.model('User', userSchema);
+var Course = mongoose.model('Course', courseSchema);
 
 exports.Drug = Drug;
 exports.Patient = Patient;
+exports.User = User;
+exports.Course = Course;

@@ -6,11 +6,12 @@
 
 var express = require('express')
   , routes = require('./routes')
-  , user = require('./routes/user')
+  , users = require('./routes/user')
   , login = require('./routes/login')
   , reminder = require('./routes/reminder')
   , patients = require('./routes/patients')
   , drugs = require('./routes/drugs')
+  , twilio = require('./routes/twilio')
   , http = require('http')
   , path = require('path')
   , port = 8080
@@ -44,7 +45,6 @@ app.configure('development', function(){
 app.get('/', routes.index);
 app.get('/login', login.index);
 app.post('/login', login.post);
-app.get('/users', user.list);
 app.get('/patients', patients.get);
 app.get('/patients/:id', patients.getOne);
 app.post('/patients', patients.post);
@@ -53,6 +53,10 @@ app.get('/drugs', drugs.get);
 app.get('/drugs/:id', drugs.getOne);
 app.post('/drugs', drugs.post);
 app.put('/drugs/:id', drugs.put);
+app.get('/users', users.get);
+app.put('/users/:id', users.put);
+
+app.post("/twilio", twilio.post);
 
 app.get('/reminder', reminder.index);
 app.post('/reminder', reminder.index);
@@ -64,6 +68,20 @@ http.createServer(app).listen(app.get('port'), function(){
 
 
 //var db = require('./db');
+//
+//var User = db.User;
+//
+//var user1 = new User({
+//    email: 'jeff@smith.test',
+//    password: 'password'
+//});
+//
+//user1.save(function(err){
+//    if (err){
+//        console.log("Unable to save user");
+//    }
+//});
+//
 //
 //var Patient = db.Patient;
 //

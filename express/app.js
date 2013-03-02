@@ -41,8 +41,28 @@ app.configure('development', function(){
   app.use(express.errorHandler());
 });
 
+app.get('/', routes.index);
+app.get('/login', login.index);
+app.post('/login', login.post);
+app.get('/users', user.list);
+app.get('/patients', patients.get);
+app.post('/patients', patients.post);
+app.get('/drugs', drugs.get);
+app.post('/drugs', drugs.post);
+
+app.get('/reminder', reminder.index);
+app.post('/reminder', reminder.index);
+
+http.createServer(app).listen(app.get('port'), function(){
+  console.log("Express server listening on port " + app.get('port'));
+  console.log(url);
+});
 
 
+//var db = require('./db');
+//
+//var Patient = db.Patient;
+//
 //var patient1 = new Patient({
 //    firstname: "Jeff",
 //    lastname: "Smith",
@@ -51,14 +71,12 @@ app.configure('development', function(){
 //    phone1: '+447723072947',
 //    phone2: '+447723072947'
 //});
-
+//
 //patient1.save(function(err){
 //    if (err){
 //        console.log('Unable to save patient1');
 //    }
 //});
-
-//var db = require('./db');
 //
 //var Drug = db.Drug;
 //
@@ -74,7 +92,7 @@ app.configure('development', function(){
 //        console.log("Unable to save drug 1");
 //    }
 //});
-
+//
 //var drug2 = new Drug({
 //    name: 'Lansoprazole',
 //    description: 'Proton-pump inhibitor',
@@ -98,20 +116,3 @@ app.configure('development', function(){
 //        console.log("Unable to save drug 3");
 //    }
 //});
-
-app.get('/', routes.index);
-app.get('/login', login.index);
-app.post('/login', login.post);
-app.get('/users', user.list);
-app.get('/patients', patients.get);
-app.post('/patients', patients.post);
-app.get('/drugs', drugs.get);
-app.post('/drugs', drugs.post);
-
-app.get('/reminder', reminder.index);
-app.post('/reminder', reminder.index);
-
-http.createServer(app).listen(app.get('port'), function(){
-  console.log("Express server listening on port " + app.get('port'));
-  console.log(url);
-});

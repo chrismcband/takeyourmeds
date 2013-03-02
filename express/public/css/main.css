@@ -1,0 +1,37 @@
+.ib-wrapper-header {
+  width: 100%;
+  height: auto;
+  background: #e43e4c; }
+  .ib-wrapper-header h1 {
+    color: #d6bf86; }
+  .ib-wrapper-header .navbar-inverse .btn-navbar {
+    background: blue; }
+
+.medicine-status {
+  display: block;
+  height: auto;
+  width: 100%;
+  border-radius: 4px;
+  padding: 0 10px;
+  margin: 2px 0; }
+
+.due {
+  background: #ffff84; }
+
+.late {
+  background: #ff4848; }
+
+.taken {
+  background: #aafd8e; }
+
+.course {
+  background: #333;
+  display: block;
+  width: 100%;
+  border-radius: 4px;
+  margin: 2px 0;
+  color: snow !important; }
+  .course span {
+    display: inline;
+    float: left;
+    color: snow !important; }

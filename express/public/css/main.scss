@@ -1,0 +1,62 @@
+$fire: #9C2A00;
+$chiffron: #FFFBD0;
+$straw: #D6BF86;
+$reallyred:#e43e4c; 
+$due:#FFFF84;
+$late:#FF4848;
+$taken:#AAFD8E;
+
+
+
+.ib-wrapper-header {
+  	width:100%;
+	height:auto;
+	background:$reallyred;
+
+	h1 {
+		color:$straw;
+	}
+	
+
+	.navbar-inverse .btn-navbar {
+	 	background:blue;
+	}
+ }
+
+ .medicine-status{
+ 	display:block;
+ 	height:auto;
+ 	width:100%;
+ 	border-radius:4px;
+ 	padding:0 10px;
+ 	margin:2px 0;
+
+
+ }
+
+  	.due{
+ 		background:$due;	
+ 	}
+
+ 	.late{
+ 		background:$late;	
+ 	}
+ 	
+ 	.taken{
+ 		background:$taken;	
+ 	}
+
+.course {
+	background:#333; 
+	display:block;
+	width:100%;
+	border-radius:4px;
+	margin:2px 0;
+	color:snow !important;
+
+	span{
+		display:inline;
+		float:left;
+		color:snow !important;
+	}
+}

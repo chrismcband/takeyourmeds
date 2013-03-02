@@ -1,0 +1,15 @@
+{
+  "name": "PillsReminder",
+  "subdomain": "chrismcband.LWSHackDay",
+  "scripts": {
+    "start": "express/app.js"
+  },
+  "version": "0.0.0-2",
+  "engines": {
+    "node": "0.8.x"
+  },
+  "dependencies": {
+    "express": "3.1.x",
+    "twilio": "0.8.x"
+  }
+}

@@ -5,17 +5,18 @@
  */
 
 var express = require('express')
-  , routes = require('./routes')
-  , users = require('./routes/user')
-  , login = require('./routes/login')
-  , reminder = require('./routes/reminder')
-  , patients = require('./routes/patients')
-  , drugs = require('./routes/drugs')
-  , twilio = require('./routes/twilio')
-  , http = require('http')
-  , path = require('path')
-  , port = 8080
-  , url  = 'http://localhost:' + port + '/';
+    , routes = require('./routes')
+    , users = require('./routes/users')
+    , login = require('./routes/login')
+    , reminder = require('./routes/reminder')
+    , patients = require('./routes/patients')
+    , drugs = require('./routes/drugs')
+    , courses = require('./routes/courses')
+    , twilio = require('./routes/twilio')
+    , http = require('http')
+    , path = require('path')
+    , port = 8080
+    , url  = 'http://localhost:' + port + '/';
 /* We can access nodejitsu enviroment variables from process.env */
 /* Note: the SUBDOMAIN variable will always be defined for a nodejitsu app */
 if(process.env.SUBDOMAIN){
@@ -52,6 +53,10 @@ app.get('/drugs', drugs.get);
 app.get('/drugs/:id', drugs.getOne);
 app.post('/drugs', drugs.post);
 app.put('/drugs/:id', drugs.put);
+app.get('/courses', courses.get);
+app.get('/courses/:id', courses.getOne);
+app.post('/courses', courses.post);
+app.put('/courses/:id', courses.put);
 app.get('/users', users.get);
 app.put('/users/:id', users.put);
 

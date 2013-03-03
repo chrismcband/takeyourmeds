@@ -9,7 +9,6 @@ exports.get = function(req, res){
     });
 };
 
-
 exports.put = function(req, res) {
     var id = req.params.id;
 

@@ -11,136 +11,123 @@
         <meta name="viewport" content="width=device-width">
 
         <link rel="stylesheet" href="css/bootstrap.css">
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-<script type="text/javascript" src="js/processing.js"></script>        
-<script type="text/javascript" src="js/process.js"></script>
-
         <link rel="stylesheet" href="css/bootstrap-responsive.min.css">
         <link rel="stylesheet" href="css/main.css">
-        <!--link rel="stylesheet" type="text/css" href="http://www.2tall.com/skin/frontend/mybase/default/css/styles.css" media="all" /-->
 
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
         <script src="js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
+        <script src="js/vendor/bootstrap.min.js"></script>
+        <script src="js/vendor/underscore.js"></script>
+        <script src="js/vendor/backbone.js"></script>
+        <script src="js/vendor/handlebars.js"></script>
+        <script src="js/models.js"></script>
+        <script src="js/views.js"></script>
+        <script src="js/app.js"></script>
     </head>
     <body> 
-<div class="ib-wrapper-header">
-        <div class="header-wrapper navbar navbar-inverse container ib-header">
-            <div class="navbar-inner">
-                <div class="row">
-                   <h1>Remember your meds</h1>
+        <div class="ib-wrapper-header">
+            <div class="header-wrapper navbar navbar-inverse container ib-header">
+                <div class="navbar-inner">
+                    <div class="row">
+                       <h1>Remember your meds</h1>
+                    </div>
                 </div>
             </div>
         </div>
-</div>
-<div class="container main-wrapper">
-<div class="row">
-               
-            
+        <div class="container main-wrapper">
             <div class="row">
-                <div class="span2">
+                <div class="row">
+                    <div class="span2">
                         <img src="http://www.fillmurray.com/100/100"/>
+                    </div>
+                    <div class="span3">
+                        <p>Patient name: Jeff Smith</p>
+                        <p>Age: 68</p>
+                        <p>Gender: Male</p>
+                        <p>Patient Contact: Jill Smith</p>
+                    </div>
+                    <div class="span7">
+                        <h1>Jeff is taking DrugName 3 times a day for 14 days</h1>
+                    </div>
                 </div>
-                <div class="span3">
-                    <p>Patient name: Jeff Smith</p>
-                    <p>Age: 68</p>
-                    <p>Gender: Male</p>
-                    <p>Patient Contact: Jill Smith</p>
-                </div>
-                <div class="span7">
-                    <h1>Jeff is taking DrugName 3 times a day for 14 days</h1>
-                </div>
-            </div>
 
-            <div class="row">
-                 <div class="span2">
-                    <a href="http://link+to+patient+info" target="_blank" class="btn-success btn" id="go">Refesh Data</a>
-                    <script>
-                    $('#go').click(function(e){
-                        e.preventDefault();
-                        $('.gohere').prepend("<div class='row medicine-status due'><h3><span>Bill</span> is due to take <span>Memoriploctin</span> at <span>14:23</span></h3></div>");
+                <div class="row">
+                     <div class="span2">
+                        <a href="http://link+to+patient+info" target="_blank" class="btn-success btn" id="go">Refesh Data</a>
+                        <script>
+                        $('#go').click(function(e){
+                            e.preventDefault();
+                            $('.gohere').prepend("<div class='row medicine-status due'><h3><span>Bill</span> is due to take <span>Memoriploctin</span> at <span>14:23</span></h3></div>");
 
+                        });
+                        </script>
+
+                        <h5>10 days left on course</h5>
+                    </div>
+                    <div class="span10 gohere">
+
+                        <div class="row medicine-status due">
+                            <h3><span>Bill</span> is due to take <span>Memoriploctin</span> at <span>14:23</span></h3>
+                        </div>
+
+                        <div class="row medicine-status late">
+                            <h3><span>&#60;name&#62;</span> is due to take <span>&#60;drug&#62;</span> at <span>&#60;time&#62;</span></h3>
+                        </div>
+
+
+                        <div class="row medicine-status taken">
+                            <h3><span>&#60;name&#62;</span> is due to take <span>&#60;drug&#62;</span> at <span>&#60;"time"&#62;</span></h3>
+                        </div>
+
+                        <div class="row medicine-status taken">
+                            <h3><span>&#60;name&#62;</span> is due to take <span>&#60;drug&#62;</span> at <span>&#60;"time"&#62;</span></h3>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Example row of columns -->
+                <div class="row">
+                    <div class="span6">
+                        <h4>Course</h4>
+                        <hr/>
+                        <h5>DRUG Name: <span class="drugId">Memoriploctin</h5>
+                        <div class="row course course-current row">
+                            <span class="dose span1">500mg</span>
+                            <span class="qty span1">x2 <span> of</span></span>
+                            <span class="type span2"> Paracetemol<span> at</span></span>
+                            <span class="time span1"> now</span>
+                        </div>
+
+                    </div>
+                    <!--<div class="span6">-->
+                        <!--<h2>Heading</h2>-->
+                        <!--<p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>-->
+                        <!--<p><a class="btn" href="#">View details &raquo;</a></p>-->
+                   <!--</div>-->
+                </div>
+                <!--
+                <form action="http://chrismcband.lwshackday.nodejitsu.com/twilio" method="post">
+                    <button type="submit">Remind Me</button>
+                </form>
+                -->
+
+                <script type="text/javascript">
+                    $(function(){
+                        $("form#twilioForm").submit(function(){
+
+                            $.ajax("http://chrismcband.lwshackday.nodejitsu.com/twilio", {
+                                type: "POST"
+                            });
+
+                            return false;
+                        });
                     });
-                    </script>
+                </script>
 
-                    <h5>10 days left on course</h5>
-                </div>
-                <div class="span10 gohere">
-
-                    <div class="row medicine-status due">
-                        <h3><span>Bill</span> is due to take <span>Memoriploctin</span> at <span>14:23</span></h3>
-                    </div>
-
-                    <div class="row medicine-status late">
-                        <h3><span>&#60;name&#62;</span> is due to take <span>&#60;drug&#62;</span> at <span>&#60;time&#62;</span></h3>
-                    </div>
-
-
-                    <div class="row medicine-status taken">
-                        <h3><span>&#60;name&#62;</span> is due to take <span>&#60;drug&#62;</span> at <span>&#60;"time"&#62;</span></h3>
-                    </div>
-
-                    <div class="row medicine-status taken">
-                        <h3><span>&#60;name&#62;</span> is due to take <span>&#60;drug&#62;</span> at <span>&#60;"time"&#62;</span></h3>
-                    </div>
-                </div>
+                <form id="twilioForm" action="http://localhost:8080/twilio" method="post">
+                    <button type="submit">Remind Me</button>
+                </form>
             </div>
-
-            <!-- Example row of columns -->
-            <div class="row">
-                <div class="span6">
-                    <h4>Course</h4>
-                    <hr/>
-                    <h5>DRUG Name: <span class="drugId">Memoriploctin</h5>
-                    <div class="row course course-current row">
-                        <span class="dose span1">500mg</span>
-                        <span class="qty span1">x2 <span> of</span></span>
-                        <span class="type span2"> Paracetemol<span> at</span></span>
-                        <span class="time span1"> now</span>
-                    </div>
-
-                </div>
-                <!--<div class="span6">-->
-                    <!--<h2>Heading</h2>-->
-                    <!--<p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>-->
-                    <!--<p><a class="btn" href="#">View details &raquo;</a></p>-->
-               <!--</div>-->
-            </div>
-    <!--
-    <form action="http://chrismcband.lwshackday.nodejitsu.com/twilio" method="post">
-        <button type="submit">Remind Me</button>
-    </form>
-    -->
-
-    <script type="text/javascript">
-        $(function(){
-            $("form#twilioForm").submit(function(){
-
-                $.ajax("http://chrismcband.lwshackday.nodejitsu.com/twilio", {
-                    type: "POST"
-                });
-
-                return false;
-            });
-        });
-    </script>
-
-    <form id="twilioForm" action="http://localhost:8080/twilio" method="post">
-        <button type="submit">Remind Me</button>
-    </form>
-
-            <hr>
-
-            <footer>
-                <p>&copy; Company 2013</p>
-            </footer>
-
-        </div> <!-- /container -->
-
-        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-        <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
-
-        <script src="js/vendor/bootstrap.min.js"></script>
-
-        <script src="js/main.js"></script>
 
         <script>
             var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']];

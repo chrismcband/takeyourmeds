@@ -48,6 +48,9 @@ exports.put = function(req, res) {
     if (req.body.gender) {
         changes.gender = req.body.gender;
     }
+    if (req.body.photo) {
+        changes.photo = req.body.photo;
+    }
     if (req.body.phone1) {
         changes.phone1 = req.body.phone1;
     }

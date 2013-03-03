@@ -31,6 +31,8 @@ var PatientSchema = mongoose.Schema({
     photo: String,
     phone1: String,
     phone2: String,
+    contactName: String,
+    contactPhone: String,
     courses: [{type: mongoose.Schema.Types.ObjectId, ref: 'Course'}]
 });
 

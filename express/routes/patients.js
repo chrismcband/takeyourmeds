@@ -1,23 +1,54 @@
 var db = require('./../db');
-
+var __ = require('underscore');
 
 exports.get = function(req, res){
-    db.Patient.find(function (err, patients) {
+    db.Patient.find().populate('courses').exec(function (err, patients) {
         if (err) {
           console.log("error finding patients "+err);
         }
-        res.send(patients);
+
+        var populatedPatients = [];
+
+        __(patients).each(function(patient){
+            var patient = patient.toObject();
+            console.log("patient: ", patient);
+            var count = 0;
+            __(patient.courses).each(function(course){
+                db.Drug.findOne({_id: course.drug}, function(err, drug){
+                    patient.courses[count].drug = drug;
+                    count++;
+                    if (count == patient.courses.length) {
+                        populatedPatients.push(patient);
+                        if (populatedPatients.length == patients.length) {
+                            console.log("populated: ", populatedPatients);
+                            res.send(populatedPatients);
+                        }
+                    }
+                });
+            });
+        });
     });
 };
 
 exports.getOne = function(req, res){
     var id = req.params.id;
 
-    db.Patient.findOne({_id: id}, function(err, patient){
+    db.Patient.findOne({_id: id}).populate('courses').exec(function(err, patient){
         if (err){
             console.log("Unable to find patient "+id);
         }
-        res.send(patient);
+        var count = 0;
+        patient = patient.toObject();
+
+        __(patient.courses).each(function(course){
+            db.Drug.findOne({_id: course.drug}, function(err, drug){
+                patient.courses[count].drug = drug;
+                count++;
+                if (count == patient.courses.length) {
+                    res.send(patient);
+                }
+            });
+        });
     });
 };
 
@@ -57,11 +88,42 @@ exports.put = function(req, res) {
     if (req.body.phone2) {
         changes.phone2 = req.body.phone2;
     }
+    if (req.body.contactName) {
+        changes.contactName = req.body.contactName;
+    }
+    if (req.body.contactPhone) {
+        changes.contactPhone = req.body.contactPhone;
+    }
+    if (req.body.courses) {
+        var courseIds = [];
+        for (var i = 0; i < req.body.courses.length; i++) {
+            courseIds.push(req.body.courses[i]._id);
+        }
+        changes.courses = courseIds;
+    }
 
     db.Patient.findOneAndUpdate({_id: id}, changes, function(err, patient){
         if (err){
-            console.log("Unable to update drug");
+            console.log("Unable to update patient", err);
         }
-        res.send(patient);
+
+        db.Patient.findOne({_id: id}).populate('courses').exec(function(err, patient){
+            if (err){
+                console.log("Unable to find updated patient", err);
+            }
+
+            var count = 0;
+            patient = patient.toObject();
+
+            __(patient.courses).each(function(course){
+                db.Drug.findOne({_id: course.drug}, function(err, drug){
+                    patient.courses[count].drug = drug;
+                    count++;
+                    if (count == patient.courses.length) {
+                        res.send(patient);
+                    }
+                });
+            });
+        });
     });
 };

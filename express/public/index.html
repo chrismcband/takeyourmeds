@@ -20,6 +20,7 @@
         <script src="js/vendor/underscore.js"></script>
         <script src="js/vendor/backbone.js"></script>
         <script src="js/vendor/handlebars.js"></script>
+        <script src="js/vendor/moment.min.js"></script>
         <script src="js/models.js"></script>
         <script src="js/views.js"></script>
         <script src="js/app.js"></script>
@@ -36,19 +37,8 @@
         </div>
         <div class="container main-wrapper">
             <div class="row">
-                <div class="row">
-                    <div class="span2">
-                        <img src="http://www.fillmurray.com/100/100"/>
-                    </div>
-                    <div class="span3">
-                        <p>Patient name: Jeff Smith</p>
-                        <p>Age: 68</p>
-                        <p>Gender: Male</p>
-                        <p>Patient Contact: Jill Smith</p>
-                    </div>
-                    <div class="span7">
-                        <h1>Jeff is taking DrugName 3 times a day for 14 days</h1>
-                    </div>
+                <div id="profile-container">
+
                 </div>
 
                 <div class="row">
@@ -128,6 +118,7 @@
                     <button type="submit">Remind Me</button>
                 </form>
             </div>
+        </div>
 
         <script>
             var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']];
@@ -136,4 +127,26 @@
             s.parentNode.insertBefore(g,s)}(document,'script'));
         </script>
     </body>
+
+    <script type="x-handlebars-template" id="patient-profile-template">
+        <div class="row">
+            <div class="span2">
+                <img src="{{photo}}"/>
+            </div>
+            <div class="span3">
+                <p>Patient name: {{firstname}} {{lastname}}</p>
+                <p>Age: {{ageInYears dob}}</p>
+                <p>Gender: {{gender}}</p>
+                <p>Phone 1: {{phone1}}</p>
+                <p>Phone 2: {{phone2}}</p>
+                <p>Patient Contact: {{contactName}}</p>
+                <p>Contact Phone: {{contactPhone}}</p>
+            </div>
+            <div class="span7">
+                {{#each courses}}
+                    <h1>{{../firstname}} is taking {{drug.name}} {{dosageTimes.length}} times a day for {{numDays startDate endDate}}</h1>
+                {{/each}}
+            </div>
+        </div>
+    </script>
 </html>

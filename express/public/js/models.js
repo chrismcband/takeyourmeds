@@ -27,7 +27,7 @@
     app.Patient = Backbone.Model.extend({
         idAttribute: "_id",
         defaults: {
-            courses: []
+            courses: new app.Courses([])
         },
         urlRoot: '/patients',
         parse: function(response, options){
@@ -36,7 +36,7 @@
                 for (var i=0; i < response.courses.length; i++) {
                     courses.push(new app.Course(response.courses[i]));
                 }
-                response.courses = courses;
+                response.courses = new app.Courses(courses);
             }
             return response;
         }

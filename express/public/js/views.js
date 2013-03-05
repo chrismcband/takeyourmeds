@@ -6,6 +6,8 @@
         },
         render: function(){
             this.$el.html(this.template(this.serialize()));
+
+            return this;
         }
     });
 
@@ -14,12 +16,44 @@
             template: Handlebars.compile($("#patient-profile-template").html()),
             el: $("#profile-container")[0],
             serialize: function(){
-                console.log(this.model.get("courses"));
                 var data = this.model.toJSON();
-                for (var i = 0; i < data.courses.length; i++) {
-                    data.courses[i] = this.model.get("courses")[i].toJSON();
-                }
+                data.courses = data.courses.toJSON();
                 return data;
+            }
+        });
+
+        app.CourseItineraryView = app.BaseView.extend({
+            template: Handlebars.compile($("#course-itinerary-template").html())
+        });
+
+        app.CourseListView = app.BaseView.extend({
+            el: $("#courses-container"),
+            initialize: function(){
+                this.model.on("add", this.add, this);
+                this.model.on("remove", this.remove, this);
+
+                this._subviews = [];
+                this.model.each(function(course){
+                    this._subviews.push(new app.CourseItineraryView({model: course}));
+                }, this);
+            },
+            add: function(course){
+                this._subviews.push(new app.CourseItineraryView({model: course}));
+            },
+            remove: function(course){
+                //find the view associated with the course
+                var v = _(this._subviews).find(function(subview){
+                    return subview.model == course;
+                });
+
+                v.remove();
+                this._subviews = _(this._subviews).without(v);
+            },
+            render: function(){
+                this.$el.empty();
+                _(this._subviews).each(function(v){
+                    this.$el.append(v.render().el);
+                }, this);
             }
         });
 
@@ -40,6 +74,13 @@
             } else {
                 return numDays + " day";
             }
+        });
+
+        Handlebars.registerHelper('formatTime', function(timeInSecs, format){
+            if (typeof format != 'string') {
+                format = 'HH:mm';
+            }
+            return moment().seconds(timeInSecs).format(format);
         });
     });
 

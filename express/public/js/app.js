@@ -3,7 +3,7 @@
 
     app.init = function(){
         var patient = new app.Patient({
-            _id: "51321002a345ff872b000001"
+            _id: '51321002a345ff872b000001'
         });
         patient.fetch({
             success: function(p){
@@ -12,6 +12,12 @@
                 });
 
                 patientView.render();
+
+                var courseListView = new app.CourseListView({
+                    model: patient.get('courses')
+                });
+
+                courseListView.render();
             }
         });
     };

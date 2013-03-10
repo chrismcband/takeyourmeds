@@ -1,6 +1,6 @@
 (function(app){
     app.Drug = Backbone.Model.extend({
-        idAttribute: "_id",
+        idAttribute: '_id',
         urlRoot: '/api/drugs'
     });
 
@@ -10,7 +10,7 @@
     });
 
     app.Course = Backbone.Model.extend({
-        idAttribute: "_id",
+        idAttribute: '_id',
         urlRoot: '/api/courses',
         parse: function(response, options){
             response.drug = new app.Drug(response.drug);
@@ -25,7 +25,7 @@
     });
 
     app.Patient = Backbone.Model.extend({
-        idAttribute: "_id",
+        idAttribute: '_id',
         defaults: {
             courses: new app.Courses([])
         },
@@ -45,6 +45,14 @@
     app.Patients = Backbone.Collection.extend({
         url: '/api/patients',
         model: app.Patient
+    });
+    
+    app.User = Backbone.Model.extend({
+        idAttribute: '_id',
+        urlRoot: '/api/users',
+        defaults: {
+            role: 0
+        }
     });
 
     window.app = app;

@@ -36,8 +36,9 @@
                 console.log("In login");
                 var loginFormView = new app.LoginFormView();
                 loginFormView.on("login", function(user){
-                    app.user = user;
-                    console.log("Logged in user: "+user);
+                    app.user = new app.User(user);
+                    console.log("Logged in user: ", app.user.toJSON());
+                    window.location = "/";
                 }, this);
                 $("#main").html(loginFormView.render().el);
             }

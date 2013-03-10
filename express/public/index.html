@@ -35,7 +35,7 @@
                 </div>
             </div>
         </div>
-        <div class="container main-wrapper">
+        <div class="container main-wrapper" id="main">
             <div class="row">
                 <div id="profile-container">
 
@@ -137,5 +137,29 @@
                 <span class="time span1">{{formatTime this}}</span>
             </div>
         {{/each}}
+    </script>
+    <script type="x-handlebars-template" id="login-form-template">
+        <form class="form-horizontal" action="/login" method="post">
+            <div class="control-group">
+                <label class="control-label">Email:</label>
+                <div class="controls">
+                    <input type="email" required="required" name="email" placeholder="Email"/>
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label class="control-label">Password:</label>
+                <div class="controls">
+                    <input type="password" required="required" name="password" placeholder="Password"/>
+                </div>
+            </div>
+
+            <div class="control-group">
+                <div class="controls">
+                    <a href="/" class="btn btn-link">Cancel</a>
+                    <button type="submit" class="btn btn-primary">Login</button>
+                </div>
+            </div>
+        </form>
     </script>
 </html>

@@ -1,5 +1,12 @@
 var mongoose = require('mongoose');
-mongoose.connect('localhost', 'test');
+
+mongoose.connection.on("error", function(err){
+    console.log("Unable to connect to mongodb database 'takeyourmeds'");
+    process.exit();
+});
+
+mongoose.connect('localhost', 'takeyourmeds');
+
 //mongoose.connect('mongodb://nodejitsu_chrismcband:ri881jq2kk4bst47ck2mlno84@ds051977.mongolab.com:51977/nodejitsu_chrismcband_nodejitsudb4487647365');
 
 var DrugSchema = mongoose.Schema({
@@ -12,7 +19,7 @@ var DrugSchema = mongoose.Schema({
 var UserSchema = mongoose.Schema({
     email: String,
     password: String,
-    patientid: String
+    role: Number
 });
 
 var CourseSchema = mongoose.Schema({
@@ -24,6 +31,7 @@ var CourseSchema = mongoose.Schema({
 });
 
 var PatientSchema = mongoose.Schema({
+    owner: mongoose.Schema.Types.ObjectId,
     firstname: String,
     lastname: String,
     dob: Number,
@@ -45,3 +53,6 @@ exports.Drug = Drug;
 exports.Patient = Patient;
 exports.User = User;
 exports.Course = Course;
+exports.dropDatabase = function(callback){
+    mongoose.connection.db.dropDatabase(callback);
+};

@@ -1,5 +1,5 @@
 exports.index = function(req, res){
-    res.render('login', {});
+    res.render('login', {title: 'Take Your Meds'});
 
 
     console.log(req.session.data);
@@ -16,12 +16,10 @@ exports.post = function(req, res){
 
         if (user){
             req.session.user = user;
-            res.setHeader('Location', '/');
-            res.end();
+            res.send(user);
+//            res.end();
         } else {
             res.end('Invalid credentials');
         }
-
-        console.log(user);
     });
 };

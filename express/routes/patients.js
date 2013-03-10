@@ -37,18 +37,20 @@ exports.getOne = function(req, res){
         if (err){
             console.log("Unable to find patient "+id);
         }
-        var count = 0;
-        patient = patient.toObject();
+        if (patient) {
+            var count = 0;
+            patient = patient.toObject();
 
-        __(patient.courses).each(function(course){
-            db.Drug.findOne({_id: course.drug}, function(err, drug){
-                patient.courses[count].drug = drug;
-                count++;
-                if (count == patient.courses.length) {
-                    res.send(patient);
-                }
+            __(patient.courses).each(function(course){
+                db.Drug.findOne({_id: course.drug}, function(err, drug){
+                    patient.courses[count].drug = drug;
+                    count++;
+                    if (count == patient.courses.length) {
+                        res.send(patient);
+                    }
+                });
             });
-        });
+        }
     });
 };
 

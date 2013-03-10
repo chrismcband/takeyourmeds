@@ -57,6 +57,30 @@
             }
         });
 
+        app.LoginFormView = app.BaseView.extend({
+            template: Handlebars.compile($("#login-form-template").html()),
+            events: {
+                "submit": function(e){
+                    var that = this;
+
+                    //submit login form using ajax
+                    $.ajax("/api/login", {
+                        type: "POST",
+                        data: this.$("form").serialize(),
+                        success: function(response){
+                            that.trigger("login", response);
+                        }
+                    });
+
+                    return false;
+                }
+            },
+            render: function(){
+                this.$el.html(this.template());
+                return this;
+            }
+        });
+
         Handlebars.registerHelper('ageInYears', function(dob){
             var now = new Date();
             var diffInSecs = (now.getTime() / 1000) - dob;

@@ -1,17 +1,17 @@
 (function(app){
     app.Drug = Backbone.Model.extend({
         idAttribute: "_id",
-        urlRoot: '/drugs'
+        urlRoot: '/api/drugs'
     });
 
     app.Drugs = Backbone.Collection.extend({
-        url: '/drugs',
+        url: '/api/drugs',
         model: app.Drug
     });
 
     app.Course = Backbone.Model.extend({
         idAttribute: "_id",
-        urlRoot: '/courses',
+        urlRoot: '/api/courses',
         parse: function(response, options){
             response.drug = new app.Drug(response.drug);
 
@@ -20,7 +20,7 @@
     });
 
     app.Courses = Backbone.Collection.extend({
-        url: '/courses',
+        url: '/api/courses',
         model: app.Course
     });
 
@@ -29,7 +29,7 @@
         defaults: {
             courses: new app.Courses([])
         },
-        urlRoot: '/patients',
+        urlRoot: '/api/patients',
         parse: function(response, options){
             if (response.courses) {
                 var courses = [];
@@ -43,7 +43,7 @@
     });
 
     app.Patients = Backbone.Collection.extend({
-        url: '/patients',
+        url: '/api/patients',
         model: app.Patient
     });
 

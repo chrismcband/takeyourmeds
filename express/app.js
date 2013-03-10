@@ -43,22 +43,21 @@ app.configure('development', function(){
   app.use(express.errorHandler());
 });
 
-app.get('/login', login.index);
-app.post('/login', login.post);
-app.get('/patients', patients.get);
-app.get('/patients/:id', patients.getOne);
-app.post('/patients', patients.post);
-app.put('/patients/:id', patients.put);
-app.get('/drugs', drugs.get);
-app.get('/drugs/:id', drugs.getOne);
-app.post('/drugs', drugs.post);
-app.put('/drugs/:id', drugs.put);
-app.get('/courses', courses.get);
-app.get('/courses/:id', courses.getOne);
-app.post('/courses', courses.post);
-app.put('/courses/:id', courses.put);
-app.get('/users', users.get);
-app.put('/users/:id', users.put);
+app.post('/api/login', login.post);
+app.get('/api/patients', patients.get);
+app.get('/api/patients/:id', patients.getOne);
+app.post('/api/patients', patients.post);
+app.put('/api/patients/:id', patients.put);
+app.get('/api/drugs', drugs.get);
+app.get('/api/drugs/:id', drugs.getOne);
+app.post('/api/drugs', drugs.post);
+app.put('/api/drugs/:id', drugs.put);
+app.get('/api/courses', courses.get);
+app.get('/api/courses/:id', courses.getOne);
+app.post('/api/courses', courses.post);
+app.put('/api/courses/:id', courses.put);
+app.get('/api/users', users.get);
+app.put('/api/users/:id', users.put);
 
 app.post("/twilio", twilio.post);
 
@@ -69,76 +68,3 @@ http.createServer(app).listen(app.get('port'), function(){
   console.log("Express server listening on port " + app.get('port'));
   console.log(url);
 });
-
-
-//var db = require('./db');
-//
-//var User = db.User;
-//
-//var user1 = new User({
-//    email: 'jeff@smith.test',
-//    password: 'password'
-//});
-//
-//user1.save(function(err){
-//    if (err){
-//        console.log("Unable to save user");
-//    }
-//});
-//
-//
-//var Patient = db.Patient;
-//
-//var patient1 = new Patient({
-//    firstname: "Jeff",
-//    lastname: "Smith",
-//    dob: 0,
-//    gender: 'male',
-//    phone1: '+447723072947',
-//    phone2: '+447723072947'
-//});
-//
-//patient1.save(function(err){
-//    if (err){
-//        console.log('Unable to save patient1');
-//    }
-//});
-//
-//var Drug = db.Drug;
-//
-//var drug1 = new Drug({
-//    name: 'Candesartan',
-//    description: 'Angiotensin receptor blocker',
-//    dosageInMG: '500',
-//    type: 'pill'
-//});
-//
-//drug1.save(function(err, drug){
-//    if (err){
-//        console.log("Unable to save drug 1");
-//    }
-//});
-//
-//var drug2 = new Drug({
-//    name: 'Lansoprazole',
-//    description: 'Proton-pump inhibitor',
-//    dosageInMG: '30',
-//    type: 'pill'
-//});
-//drug2.save(function(err, drug){
-//    if (err){
-//        console.log("Unable to save drug 2");
-//    }
-//});
-//
-//var drug3 = new Drug({
-//    name: 'Metformin',
-//    description: 'Blood glucose regulator',
-//    dosageInMG: '500',
-//    type: 'pill'
-//});
-//drug3.save(function(err, drug){
-//    if (err){
-//        console.log("Unable to save drug 3");
-//    }
-//});

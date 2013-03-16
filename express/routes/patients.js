@@ -9,6 +9,8 @@ exports.get = function(req, res){
 
         var populatedPatients = [];
 
+        console.log("patients "+patients);
+
         __(patients).each(function(patient){
             var patient = patient.toObject();
             console.log("patient: ", patient);

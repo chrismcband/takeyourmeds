@@ -1,0 +1,53 @@
+<div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar-inner">
+        <div class="container-fluid">
+            <a class="brand" href="#">Take Your Meds</a>
+            <span class="navbar-text">Helps to keep track of your daily medication, with scheduled telephone reminders</span>
+            <ul class="nav pull-right">
+                <li>
+                    <a href="https://github.com/chrismcband/pillsreminder">GitHub Source</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div id="main-content" class="main-content">
+    <div id="profile-container"></div>
+
+    <div class="row">
+         <div class="span2">
+            <a href="http://link+to+patient+info" target="_blank" class="btn-success btn" id="go">Refesh Data</a>
+            <script>
+            $('#go').click(function(e){
+                e.preventDefault();
+                $('.gohere').prepend("<div class='row medicine-status due'><h3><span>Bill</span> is due to take <span>Memoriploctin</span> at <span>14:23</span></h3></div>");
+
+            });
+            </script>
+
+            <h5>10 days left on course</h5>
+        </div>
+        <div class="span10 gohere">
+
+            <div class="row medicine-status due">
+                <h3><span>Bill</span> is due to take <span>Memoriploctin</span> at <span>14:23</span></h3>
+            </div>
+
+            <div class="row medicine-status late">
+                <h3><span>&#60;name&#62;</span> is due to take <span>&#60;drug&#62;</span> at <span>&#60;time&#62;</span></h3>
+            </div>
+
+
+            <div class="row medicine-status taken">
+                <h3><span>&#60;name&#62;</span> is due to take <span>&#60;drug&#62;</span> at <span>&#60;"time"&#62;</span></h3>
+            </div>
+
+            <div class="row medicine-status taken">
+                <h3><span>&#60;name&#62;</span> is due to take <span>&#60;drug&#62;</span> at <span>&#60;"time"&#62;</span></h3>
+            </div>
+        </div>
+    </div>
+
+    <div id="courses-container"></div>
+</div>

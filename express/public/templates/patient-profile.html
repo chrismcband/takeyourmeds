@@ -1,0 +1,19 @@
+<div class="row">
+    <div class="span2">
+        <img src="{{photo}}"/>
+    </div>
+    <div class="span3">
+        <p>Patient name: {{firstname}} {{lastname}}</p>
+        <p>Age: {{ageInYears dob}}</p>
+        <p>Gender: {{gender}}</p>
+        <p>Phone 1: {{phone1}}</p>
+        <p>Phone 2: {{phone2}}</p>
+        <p>Patient Contact: {{contactName}}</p>
+        <p>Contact Phone: {{contactPhone}}</p>
+    </div>
+    <div class="span7">
+        {{#each courses}}
+            <h1>{{../firstname}} is taking {{drug.name}} {{dosageTimes.length}} times a day for {{numDays startDate endDate}}</h1>
+        {{/each}}
+    </div>
+</div>

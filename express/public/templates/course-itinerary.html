@@ -1,0 +1,9 @@
+<h5>DRUG Name: <span class="drug-id">{{drug.name}}</span></h5>
+{{#each dosageTimes}}
+    <div class="row course">
+        <span class="dose span1">{{../drug.dosageInMG}}mg</span>
+        <span class="qty span1">&times; {{../quantity}}</span>
+        <span class="type span2">{{../drug.name}}</span>
+        <span class="time span1">{{formatTime this}}</span>
+    </div>
+{{/each}}

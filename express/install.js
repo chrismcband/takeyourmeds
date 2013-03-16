@@ -96,9 +96,31 @@ function install() {
                     console.log("Saved: "+m);
                     processedCount += 1;
                     if (processedCount === queue.length) {
-                        //finished saving models, exit
-                        process.stdout.write("Finished.\n");
-                        process.exit();
+
+                        var course = new db.Course({
+                            "drug": drug1._id,
+                            quantity: 1,
+                            dosageTimes: [ 36000, 75600 ],
+                            startDate: 1362322800,
+                            endDate: 1364652000
+                        });
+
+                        course.save(function(err, c){
+                            if (err){
+                                console.log(err);
+                            }
+
+                            patient1.courses.push(course._id);
+
+                            patient1.save(function(err, m){
+                                if (err){
+                                    console.log(err);
+                                }
+                                //finished saving models, exit
+                                process.stdout.write("Finished.\n");
+                                process.exit();
+                            });
+                        });
                     }
                 }
             });

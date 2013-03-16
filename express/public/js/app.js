@@ -1,67 +1,92 @@
-(function($){
-    var app = window.app || {};
+define([
+    "backbone.layoutmanager",
+    "handlebars"
 
-    app.init = function(){
+    // Include additional libraries installed with JamJS or placed in the
+    // `vendor/js` directory, here.
+],
+function (LayoutManager, Handlebars) {
 
-        //create backbone router
-        var Router = Backbone.Router.extend({
-            routes: {
-                "": "index",
-                "login": "login"
-            },
-
-            index: function(){
-                console.log("In index");
-                var patient = new app.Patient({
-                    _id: '51321002a345ff872b000001'
-                });
-                patient.fetch({
-                    success: function(p){
-                        var patientView = new app.PatientProfileView({
-                            model: patient
-                        });
-
-                        patientView.render();
-
-                        var courseListView = new app.CourseListView({
-                            model: patient.get('courses')
-                        });
-
-                        courseListView.render();
-                    }
-                });
-            },
-
-            login: function(){
-                console.log("In login");
-                var loginFormView = new app.LoginFormView();
-                loginFormView.on("login", function(user){
-                    app.user = new app.User(user);
-                    console.log("Logged in user: ", app.user.toJSON());
-                    window.location = "/";
-                }, this);
-                $("#main").html(loginFormView.render().el);
-            }
-        });
-
-        app.router = new Router();
-
-        $(document).on("click", "a:not([data-bypass])", function(evt) {
-            var href = { prop: $(this).prop("href"), attr: $(this).attr("href") };
-            var root = location.protocol + "//" + location.host + app.root;
-
-            if (href.prop && href.prop.slice(0, root.length) === root) {
-                evt.preventDefault();
-                Backbone.history.navigate(href.attr, true);
-            }
-        });
-
-        Backbone.history.start({ pushState: false, root: "/" });
+    // Provide a global location to place configuration settings and module
+    // creation.
+    var app = {
+        // The root path to run the application.
+        root: "/"
     };
 
-    $(function(){
-        app.init();
+    // Localize or create a new JavaScript Template object.
+    var JST = window.JST = window.JST || {};
+
+    // Configure LayoutManager with Backbone Boilerplate defaults.
+    LayoutManager.configure({
+        // Allow LayoutManager to augment Backbone.View.prototype.
+        manage: true,
+
+        prefix: "templates/",
+
+        fetch: function (path) {
+            var done;
+
+            // Add the html extension.
+            path = path + ".html";
+
+            // If the template has not been loaded yet, then load.
+            if (!JST[path]) {
+                done = this.async();
+                return $.ajax({ url: app.root + path }).then(function (contents) {
+                    JST[path] = Handlebars.compile(contents);
+                    JST[path].__compiled__ = true;
+
+                    done(JST[path]);
+                });
+            }
+
+            // If the template hasn't been compiled yet, then compile.
+            if (!JST[path].__compiled__) {
+                JST[path] = Handlebars.template(JST[path]);
+                JST[path].__compiled__ = true;
+            }
+
+            return JST[path];
+        }
     });
 
+    // Mix Backbone.Events, modules, and layout management into the app object.
+    return _.extend(app, {
+        // Create a custom object with a nested Views object.
+        module: function (additionalProps) {
+            return _.extend({ Views: {} }, additionalProps);
+        },
 
-})(jQuery);
+        // Helper for using layouts.
+        useLayout: function (name, options) {
+            // Enable variable arity by allowing the first argument to be the options
+            // object and omitting the name argument.
+            if (_.isObject(name)) {
+                options = name;
+            }
+
+            // Ensure options is an object.
+            options = options || {};
+
+            // If a name property was specified use that as the template.
+            if (_.isString(name)) {
+                options.template = name;
+            }
+
+            // Check if a layout already exists, if so, update the template.
+            if (this.layout) {
+                this.layout.template = options.template;
+            } else {
+                // Create a new Layout with options.
+                this.layout = new Backbone.Layout(_.extend({
+                    el: "#main"
+                }, options));
+            }
+
+            // Cache the reference.
+            return this.layout;
+        }
+    }, Backbone.Events);
+
+});

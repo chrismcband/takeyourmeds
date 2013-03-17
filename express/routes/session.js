@@ -5,6 +5,14 @@ exports.index = function(req, res){
     console.log(req.session.data);
 };
 
+exports.get = function(req, res){
+    if (req.session.user) {
+        res.send(req.session.user);
+    } else {
+        res.send(false);
+    }
+};
+
 exports.post = function(req, res){
 
     var db = require('./../db');

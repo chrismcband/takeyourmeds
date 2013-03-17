@@ -7,7 +7,7 @@
 var express = require('express')
     , routes = require('./routes')
     , users = require('./routes/users')
-    , login = require('./routes/login')
+    , session = require('./routes/session')
     , reminder = require('./routes/reminder')
     , patients = require('./routes/patients')
     , drugs = require('./routes/drugs')
@@ -43,7 +43,8 @@ app.configure('development', function(){
   app.use(express.errorHandler());
 });
 
-app.post('/api/login', login.post);
+app.get('/api/session', session.get);
+app.post('/api/session', session.post);
 app.get('/api/patients', patients.get);
 app.get('/api/patients/:id', patients.getOne);
 app.post('/api/patients', patients.post);

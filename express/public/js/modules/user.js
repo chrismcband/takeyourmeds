@@ -7,6 +7,9 @@ define(["app"], function(app){
         urlRoot: '/api/users',
         defaults: {
             role: 0
+        },
+        isAuth: function(){
+            return this.get("role") > 0;
         }
     });
 
@@ -18,7 +21,7 @@ define(["app"], function(app){
                 var that = this;
 
                 //submit login form using ajax
-                $.ajax("/api/login", {
+                $.ajax("/api/session", {
                     type: "POST",
                     data: this.$("form").serialize(),
                     success: function(response){
@@ -30,6 +33,18 @@ define(["app"], function(app){
             }
         }
     });
+
+    User.sessionCheck = function(callback){
+        var u = new User.Model();
+        $.getJSON("/api/session", function(data){
+            if (data) {
+                u.set(data);
+                callback(u);
+            } else {
+                callback(u);
+            }
+        });
+    };
 
     return User;
 });

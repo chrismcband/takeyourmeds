@@ -13,7 +13,11 @@ function (app, User, Patient, Course) {
     // Defining the application router, you can attach sub routers here.
     var Router = Backbone.Router.extend({
         initialize: function(){
-            app.user = app.user || new User.Model();
+            var that = this;
+            User.sessionCheck(function(user){
+                app.user = user;
+                that.index();
+            });
         },
 
         routes: {
@@ -22,9 +26,12 @@ function (app, User, Patient, Course) {
         },
 
         index: function () {
-            if (app.user.get("role") == 0) {
+            if (!app.user){
+                return;
+            }
+            if (!app.user.isAuth()) {
                 //redirect to login
-                Backbone.history.navigate("/login", true);
+                this.navigate("/login", {trigger: true, replace: true});
                 return;
             }
 
@@ -58,16 +65,22 @@ function (app, User, Patient, Course) {
         login: function () {
             console.log("In login");
 
+            //if already authenticated, redirect back to index
+            if (app.user && app.user.isAuth()) {
+                this.navigate("", {trigger: true, replace: true});
+                return;
+            }
+
             var loginFormView = new User.Views.LoginFormView({
                 model: app.user
             });
             loginFormView.on("login", function (user) {
                 app.user = new User.Model(user);
                 console.log("Logged in user: ", app.user.toJSON());
-                Backbone.history.navigate("", true);
+                this.navigate("", {trigger: true});
             }, this);
 
-            app.useLayout("layouts/login").setViews({
+            app.useLayout("layouts/main").setViews({
                 "#main-content": loginFormView
             }).render();
         }

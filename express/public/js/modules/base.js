@@ -24,4 +24,11 @@ define(["handlebars", "moment"], function(Handlebars, moment){
         }
         return moment().seconds(timeInSecs).format(format);
     });
+
+    Handlebars.registerHelper('genderFields', function(gender){
+        var s = '<option value="male" '+(gender=="male" ? 'selected="selected"' : '')+'/>';
+        s += '<option value="female" '+(gender=="female" ? 'selected="selected"' : '')+'/>';
+
+        return s;
+    });
 });

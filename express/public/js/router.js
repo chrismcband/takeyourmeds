@@ -22,7 +22,8 @@ function (app, User, Patient, Course) {
 
         routes: {
             "": "index",
-            "login": "login"
+            "login": "login",
+            "admin/patient": "patientForm"
         },
 
         index: function () {
@@ -36,7 +37,7 @@ function (app, User, Patient, Course) {
             }
 
             var patient = new Patient.Model({
-                _id: '5144e71b2f89000a04000002'
+                _id: '5145de49eb1d3da108000002'
             });
 
             var patientView = new Patient.Views.PatientProfileView({
@@ -82,6 +83,18 @@ function (app, User, Patient, Course) {
 
             app.useLayout("layouts/main").setViews({
                 "#main-content": loginFormView
+            }).render();
+        },
+
+        patientForm: function(){
+            console.log("In patientForm");
+            var form = new Patient.Views.PatientFormView();
+
+            var layout = app.useLayout("layouts/main");
+            layout.removeView();
+
+            layout.setViews({
+                "#main-content": form
             }).render();
         }
     });

@@ -34,5 +34,21 @@ define(["app", "modules/course", "modules/base"], function(app, Course){
         }
     });
 
+    Patient.Views.PatientFormView = Backbone.View.extend({
+        template: "patients/form",
+        events: {
+            "submit form": "formSubmitted"
+        },
+        manage: true,
+        formSubmitted: function(e){
+
+            this.$("#firstname").val();
+        },
+        serialize: function(){
+            var data = this.model ? this.model.toJSON() : {};
+            return data;
+        }
+    });
+
     return Patient;
 });

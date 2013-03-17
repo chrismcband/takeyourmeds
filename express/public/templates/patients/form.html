@@ -1,0 +1,48 @@
+<form class="form-horizontal">
+    <div class="control-group">
+        <label class="control-label" for="firstname">First name:</label>
+
+        <div class="controls">
+            <input type="text" id="firstname" name="firstname" placeholder="First name" value="{{firstname}}">
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label" for="lastname">Last name:</label>
+
+        <div class="controls">
+            <input type="text" id="lastname" name="lastname" placeholder="Last name" value="{{lastname}}"/>
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label">Sex:</label>
+
+        <div class="controls">
+            <select id="gender" name="gender">
+                {{genderFields gender}}
+            </select>
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label">Date of birth:</label>
+
+        <div class="controls">
+            <input type="number" id="day"/>
+            <input type="number" id="month"/>
+            <input type="number" id="year"/>
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label" for="phone1">Phone 1:</label>
+
+        <div class="controls">
+            <input type="text" id="phone1" name="phone1" placeholder="Last name">
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label" for="phone2">Phone 2:</label>
+
+        <div class="controls">
+            <input type="text" id="phone2" name="phone2" placeholder="Last name">
+        </div>
+    </div>
+</form>

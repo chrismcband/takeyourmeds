@@ -16,7 +16,18 @@ function (app, User, Patient, Course) {
             var that = this;
             User.sessionCheck(function(user){
                 app.user = user;
+                that.trigger("session", user);
             });
+
+            //set the default app layout
+            app.useLayout("layouts/main");
+
+            app.layout.on("afterRender", function(){
+                //hide elements the session user should not see
+                if (app.user && app.user.get("role") == 1) {
+                    app.layout.$(".role-1").show();
+                }
+            }, this);
         },
 
         routes: {
@@ -27,6 +38,9 @@ function (app, User, Patient, Course) {
 
         index: function () {
             if (!app.user){
+                this.on("session", function(user){
+                    this.index();
+                }, this)
                 return;
             }
             if (!app.user.isAuth()) {

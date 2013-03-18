@@ -55,7 +55,7 @@ function install() {
         var patient1 = new db.Patient({
             firstname: "Jeff",
             lastname: "Smith",
-            dob: 0,
+            dob: -501271200,
             gender: 'male',
             phone1: '+447723072947',
             phone2: '+447723072947'

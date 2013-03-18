@@ -15,19 +15,28 @@ exports.get = function(req, res){
             var patient = patient.toObject();
             console.log("patient: ", patient);
             var count = 0;
-            __(patient.courses).each(function(course){
-                db.Drug.findOne({_id: course.drug}, function(err, drug){
-                    patient.courses[count].drug = drug;
-                    count++;
-                    if (count == patient.courses.length) {
-                        populatedPatients.push(patient);
-                        if (populatedPatients.length == patients.length) {
-                            console.log("populated: ", populatedPatients);
-                            res.send(populatedPatients);
+            if (patient.courses.length > 0) {
+                __(patient.courses).each(function(course){
+                    db.Drug.findOne({_id: course.drug}, function(err, drug){
+                        patient.courses[count].drug = drug;
+                        count++;
+                        if (count == patient.courses.length) {
+                            populatedPatients.push(patient);
+                            if (populatedPatients.length == patients.length) {
+                                console.log("populated: ", populatedPatients);
+                                res.send(populatedPatients);
+                            }
                         }
-                    }
+                    });
                 });
-            });
+            } else {
+                populatedPatients.push(patient);
+                if (populatedPatients.length == patients.length) {
+                    console.log("populated: ", populatedPatients);
+                    res.send(populatedPatients);
+                }
+            }
+
         });
     });
 };
@@ -43,15 +52,19 @@ exports.getOne = function(req, res){
             var count = 0;
             patient = patient.toObject();
 
-            __(patient.courses).each(function(course){
-                db.Drug.findOne({_id: course.drug}, function(err, drug){
-                    patient.courses[count].drug = drug;
-                    count++;
-                    if (count == patient.courses.length) {
-                        res.send(patient);
-                    }
+            if (patient.courses.length > 0){
+                __(patient.courses).each(function(course){
+                    db.Drug.findOne({_id: course.drug}, function(err, drug){
+                        patient.courses[count].drug = drug;
+                        count++;
+                        if (count == patient.courses.length) {
+                            res.send(patient);
+                        }
+                    });
                 });
-            });
+            } else {
+                res.send(patient);
+            }
         }
     });
 };

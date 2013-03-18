@@ -16,7 +16,6 @@ function (app, User, Patient, Course) {
             var that = this;
             User.sessionCheck(function(user){
                 app.user = user;
-                that.index();
             });
         },
 
@@ -37,7 +36,7 @@ function (app, User, Patient, Course) {
             }
 
             var patient = new Patient.Model({
-                _id: '5145de49eb1d3da108000002'
+                _id: '51465d91acc9f0fd07000002'
             });
 
             var patientView = new Patient.Views.PatientProfileView({
@@ -87,15 +86,32 @@ function (app, User, Patient, Course) {
         },
 
         patientForm: function(){
-            console.log("In patientForm");
-            var form = new Patient.Views.PatientFormView();
+            //fetch patients collection
+            var patients = new Patient.Collection([]);
+            var patientList = new Patient.Views.PatientListView({
+                model: patients
+            });
+            patients.fetch({update: true});
 
-            var layout = app.useLayout("layouts/main");
+            var form = new Patient.Views.PatientFormView({
+                collection: patients
+            });
+
+            patientList.on("select", function(patientId){
+                form.model = patients.get(patientId);
+                form.render();
+            }, this);
+
+            var layout = app.useLayout("layouts/admin");
+
             layout.removeView();
 
             layout.setViews({
-                "#main-content": form
-            }).render();
+                "#admin-collection-list": patientList,
+                "#admin-edit-content": form
+            }).render().then(function(){
+                layout.$("#patients-admin").parent().addClass("active");
+            });
         }
     });
 

@@ -1,4 +1,4 @@
-define(["handlebars", "moment"], function(Handlebars, moment){
+define(["handlebars", "moment", "bootstrap"], function(Handlebars, moment){
     Handlebars.registerHelper('ageInYears', function(dob){
         var now = new Date();
         var diffInSecs = (now.getTime() / 1000) - dob;
@@ -26,9 +26,27 @@ define(["handlebars", "moment"], function(Handlebars, moment){
     });
 
     Handlebars.registerHelper('genderFields', function(gender){
-        var s = '<option value="male" '+(gender=="male" ? 'selected="selected"' : '')+'/>';
-        s += '<option value="female" '+(gender=="female" ? 'selected="selected"' : '')+'/>';
+        var s = '<option value="male" '+(gender=="male" ? 'selected="selected"' : '')+'>Male</option>';
+        s += '<option value="female" '+(gender=="female" ? 'selected="selected"' : '')+'>Female</option>';
 
-        return s;
+        return new Handlebars.SafeString(s);
+    });
+
+    /**
+     * Provides iteration similar to #each but adds i (index) and iPlus1 (index + 1)
+     * values to the context
+     */
+    Handlebars.registerHelper('iter', function(context, options) {
+        var fn = options.fn, inverse = options.inverse;
+        var ret = "";
+
+        if(context && context.length > 0) {
+            for(var i=0, j=context.length; i<j; i++) {
+                ret = ret + fn(_.extend({}, context[i], { i: i, iPlus1: i + 1 }));
+            }
+        } else {
+            ret = inverse(this);
+        }
+        return ret;
     });
 });

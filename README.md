@@ -12,10 +12,10 @@ Reminds people to take their medication.
 
 ## Set up
 Assuming you have installed node and mongodb correctly and can execute the `node` command and have a mongodb daemon running (try running the command line `mongo` client, if that doesn't work, try starting the daemon `mongod`)
-
-1. Make sure the mongodb daemon is running (try using the command line `mongo` client, if that fails start the daemon using `mongod` or `sudo service mongodb start` on ubunu.
-2. In project directory run `node express/install.js`, this interactive script tells you it will install some base dummy data to get your started. Press enter when asked.
-3. If step 2 went ok, you should see some output in the terminal about the objects that were inserted in the database. You may need to copy the _id field of the patient, in the client router index (public/js/router.js index function), there is some code to fetch a patient by id. Paste the id of the patient that was inserted into the database here so the index function will work.
+1. Install npm packages. At project root directory run `npm install`.
+2. Make sure the mongodb daemon is running (try using the command line `mongo` client, if that fails start the daemon using `mongod` or `sudo service mongodb start` on ubunu.
+3. In project directory run `node express/install.js`, this interactive script tells you it will install some base dummy data to get your started. Press enter when asked.
+4. If step 3 went ok, you should see some output in the terminal about the objects that were inserted in the database. You may need to copy the _id field of the patient, in the client router index (public/js/router.js index function), there is some code to fetch a patient by id. Paste the id of the patient that was inserted into the database here so the index function will work.
 
 # Running the server
 

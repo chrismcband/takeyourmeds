@@ -58,7 +58,9 @@ app.get('/api/courses/:id', courses.getOne);
 app.post('/api/courses', courses.post);
 app.put('/api/courses/:id', courses.put);
 app.get('/api/users', users.get);
+app.post('/api/users', users.post);
 app.put('/api/users/:id', users.put);
+app.delete('/api/users/:id', users.delete);
 
 app.post("/twilio", twilio.post);
 

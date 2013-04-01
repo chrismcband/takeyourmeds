@@ -33,7 +33,8 @@ function (app, User, Patient, Course) {
         routes: {
             "": "index",
             "login": "login",
-            "admin/patient": "patientForm"
+            "admin/patients": "patientForm",
+            "admin/users": "usersForm"
         },
 
         index: function () {
@@ -125,6 +126,35 @@ function (app, User, Patient, Course) {
                 "#admin-edit-content": form
             }).render().then(function(){
                 layout.$("#patients-admin").parent().addClass("active");
+            });
+        },
+
+        usersForm: function(){
+            //fetch users collection
+            var users = new User.Collection([]);
+            var userList = new User.Views.UserListView({
+                model: users
+            });
+            users.fetch({update: true});
+
+            var form = new User.Views.UserFormView({
+                collection: users
+            });
+
+            userList.on("select", function(userId){
+                form.model = users.get(userId);
+                form.render();
+            }, this);
+
+            var layout = app.useLayout("layouts/admin");
+
+            layout.removeView();
+
+            layout.setViews({
+                "#admin-collection-list": userList,
+                "#admin-edit-content": form
+            }).render().then(function(){
+                layout.$("#users-admin").parent().addClass("active");
             });
         }
     });

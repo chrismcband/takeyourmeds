@@ -9,6 +9,17 @@ exports.get = function(req, res){
     });
 };
 
+exports.post = function(req, res){
+    var user = new db.User(req.body);
+
+    user.save(function(err, u){
+        if (err){
+            console.log("Unable to save user");
+        }
+        res.send(u);
+    });
+};
+
 exports.put = function(req, res) {
     var id = req.params.id;
 
@@ -21,6 +32,18 @@ exports.put = function(req, res) {
         res.send(user);
     });
 };
+
+exports.delete = function(req, res) {
+    var id = req.params.id;
+
+    db.User.remove({_id: id}, function(err){
+        if (err){
+            console.log("Unable to delete user");
+        }
+        //send id as json string
+        res.send('"'+id+'"');
+    });
+}
 
 /*
  * GET users listing.

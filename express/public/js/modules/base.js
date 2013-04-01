@@ -32,6 +32,13 @@ define(["handlebars", "moment", "bootstrap"], function(Handlebars, moment){
         return new Handlebars.SafeString(s);
     });
 
+    Handlebars.registerHelper('roleFields', function(role){
+        var s = '<option value="1" '+(role==1 ? 'selected="selected"' : '')+'>Super User</option>';
+        s += '<option value="2" '+(role==2 ? 'selected="selected"' : '')+'>Patient</option>';
+
+        return new Handlebars.SafeString(s);
+    });
+
     /**
      * Provides iteration similar to #each but adds i (index) and iPlus1 (index + 1)
      * values to the context

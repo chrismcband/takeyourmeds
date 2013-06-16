@@ -21,6 +21,18 @@ define(['backbone', 'hbs!templates/user/item', 'marionette'], function(Backbone,
             } else {
                 this.$el.removeClass("info");
             }
+        },
+        serializeData: function(){
+            var data = this.model.toJSON();
+            data.passwordHidden = "";
+            if (data.password) {
+                for (var i = 0; i < data.password.length; i++) {
+                    data.passwordHidden += "*";
+                }
+            }
+            data.roleName = data.role == 1 ? "Super user" : "Patient";
+
+            return data;
         }
     });
 

@@ -1,4 +1,4 @@
-define(['jquery', 'hbs!templates/patient-profile', 'backbone', 'marionette'],
+define(['jquery', 'hbs!templates/patient/profile', 'backbone', 'marionette'],
     function($, template, Backbone){
         var PatientProfileView = Backbone.Marionette.ItemView.extend({
             template: template,

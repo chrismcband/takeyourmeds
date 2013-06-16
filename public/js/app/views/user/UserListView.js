@@ -1,10 +1,10 @@
 define(['backbone', 'views/user/UserItemView', 'hbs!templates/user/list', 'marionette'],
     function(Backbone, UserItemView, template){
-        var UserListView = Backbone.View.extend({
+        var UserListView = Backbone.Marionette.CompositeView.extend({
             template: template,
             itemView: UserItemView,
             itemViewContainer: "tbody",
-            modelEvents: {
+            collectionEvents: {
                 "change:selected": "itemSelected"
             },
             itemSelected: function(model, selected){
@@ -15,21 +15,8 @@ define(['backbone', 'views/user/UserItemView', 'hbs!templates/user/list', 'mario
                             user.set("selected", false);
                         }
                     }, this);
+                    this.trigger("itemSelected", model);
                 }
-            },
-            serialize: function(){
-                var data = this.model.toJSON();
-                _(data).each(function(d){
-                    d.passwordHidden = "";
-                    data.passwordHidden = "";
-                    if (d.password) {
-                        for (var i = 0; i < d.password.length; i++) {
-                            d.passwordHidden += "*";
-                        }
-                    }
-                })
-
-                return data;
             }
         });
 

@@ -2,10 +2,10 @@ define(['App', 'backbone', 'marionette', 'jquery', 'models/User', 'collections/U
     'models/Patient', 'collections/Patients',
     'views/WelcomeView', 'views/DesktopHeaderView',
     'views/patient/PatientListView', 'views/patient/PatientFormView', 'views/patient/PatientProfileView',
-    'views/user/UserListView', 'views/user/UserFormView', 'views/user/LoginFormView'],
+    'views/user/UserListView', 'views/user/UserFormView', 'views/user/LoginFormView', 'views/layout/AdminLayout'],
     function (App, Backbone, Marionette, $, User, Users, Patient, Patients,
               WelcomeView, DesktopHeaderView, PatientListView, PatientFormView, PatientProfileView,
-              UserListView, UserFormView, LoginFormView) {
+              UserListView, UserFormView, LoginFormView, AdminLayout) {
 
         return Backbone.Marionette.Controller.extend({
             initialize:function (options) {
@@ -108,64 +108,54 @@ define(['App', 'backbone', 'marionette', 'jquery', 'models/User', 'collections/U
             },
 
             patientForm: function(){
+                //use the admin layout for main content
+                var layout = new AdminLayout();
+                App.mainRegion.show(layout);
+
                 //fetch patients collection
                 var patients = new Patients([]);
                 var patientList = new PatientListView({
-                    model: patients
+                    collection: patients
                 });
-                patients.fetch({update: true});
+                patients.fetch({add: true});
 
                 var form = new PatientFormView({
                     collection: patients
                 });
 
-                patientList.on("select", function(patientId){
-                    form.model = patients.get(patientId);
+                patientList.on("itemSelected", function(patient){
+                    form.model = patient;
                     form.render();
                 }, this);
 
-//                var layout = app.useLayout("layouts/admin");
-//
-//                layout.removeView();
-//
-//                layout.setViews({
-//                    "#admin-collection-list": patientList,
-//                    "#admin-edit-content": form
-//                }).render().then(function(){
-//                    layout.$("#patients-admin").parent().addClass("active");
-//                });
+                layout.listItems.show(patientList);
+                layout.detail.show(form);
             },
 
             usersForm: function(){
-                console.log("In usersForm");
+                //use the admin layout for main content
+                var layout = new AdminLayout();
+                layout.render();
+                App.mainRegion.show(layout);
+
                 //fetch users collection
                 var users = new Users([]);
                 var userList = new UserListView({
-                    model: users
+                    collection: users
                 });
-                users.fetch({update: true});
+                users.fetch({add: true});
 
                 var form = new UserFormView({
                     collection: users
                 });
 
-                userList.on("select", function(userId){
-                    form.model = users.get(userId);
+                userList.on("itemSelected", function(user){
+                    form.model = user;
                     form.render();
                 }, this);
 
-
-
-//                var layout = app.useLayout("layouts/admin");
-//
-//                layout.removeView();
-//
-//                layout.setViews({
-//                    "#admin-collection-list": userList,
-//                    "#admin-edit-content": form
-//                }).render().then(function(){
-//                    layout.$("#users-admin").parent().addClass("active");
-//                });
+                layout.detail.show(form);
+                layout.listItems.show(userList);
             }
         });
     }

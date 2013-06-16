@@ -4,7 +4,7 @@ define(['backbone', 'views/patient/PatientItemView', 'hbs!templates/patient/list
             template: template,
             itemView: PatientItemView,
             itemViewContainer: "tbody",
-            modelEvents: {
+            collectionEvents: {
                 "change:selected": "itemSelected"
             },
             itemSelected: function(model, selected){
@@ -15,6 +15,8 @@ define(['backbone', 'views/patient/PatientItemView', 'hbs!templates/patient/list
                             patient.set("selected", false);
                         }
                     }, this);
+
+                    this.trigger("itemSelected", model);
                 }
             }
         });

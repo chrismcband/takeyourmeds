@@ -1,4 +1,4 @@
-define(['jquery', 'backbone', 'hbs!templates/login', 'marionette'], function($, Backbone, template){
+define(['jquery', 'backbone', 'hbs!templates/user/login', 'marionette'], function($, Backbone, template){
     var LoginFormView = Backbone.Marionette.ItemView.extend({
         template: template,
         events: {

@@ -52,6 +52,7 @@ define(['backbone', 'moment', 'hbs!templates/patient/form', 'marionette'],
                 var data = this.model ? this.model.toJSON() : {};
                 //format dob so date input field displays correctly
                 data.dobFormatted = moment.unix(data.dob).format("YYYY-MM-DD");
+                data.isMale = data.gender == "male";
 
                 return data;
             }

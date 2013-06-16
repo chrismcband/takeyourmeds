@@ -51,6 +51,8 @@ define(['backbone', 'hbs!templates/user/form', 'marionette'], function(Backbone,
         },
         serializeData: function(){
             var data = this.model ? this.model.toJSON() : {};
+            data.isSuperUser = data.role == 1;
+            data.isPatient = data.role == 2;
 
             return data;
         }

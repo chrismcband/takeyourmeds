@@ -18,7 +18,12 @@
 
         <div class="controls">
             <select id="gender" name="gender">
-                {{genderFields gender}}
+                <option value="male" {{#if isMale}}selected="selected"{{/if}}>
+                    Male
+                </option>
+                <option value="female" {{#unless isMale}}selected="selected"{{/unless}}>
+                    Female
+                </option>
             </select>
         </div>
     </div>

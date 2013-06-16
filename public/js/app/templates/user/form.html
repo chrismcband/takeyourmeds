@@ -18,7 +18,12 @@
 
         <div class="controls">
             <select id="role" name="role">
-                {{roleFields role}}
+                <option value="1" {{#if isSuperUser}}selected="selected"{{/if}}>
+                    Super User
+                </option>
+                <option value="2" {{#if isPatient}}selected="selected"{{/if}}>
+                    Patient
+                </option>
             </select>
         </div>
     </div>

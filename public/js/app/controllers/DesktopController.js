@@ -1,7 +1,11 @@
-define(['App', 'backbone', 'marionette', 'jquery', 'views/WelcomeView',
-    'views/DesktopHeaderView', 'views/PatientProfileView', 'views/LoginFormView', 'models/User', 'models/Patient'],
-    function (App, Backbone, Marionette, $, WelcomeView, DesktopHeaderView, PatientProfileView, LoginFormView,
-            User, Patient) {
+define(['App', 'backbone', 'marionette', 'jquery', 'models/User', 'collections/Users',
+    'models/Patient', 'collections/Patients',
+    'views/WelcomeView', 'views/DesktopHeaderView',
+    'views/patient/PatientListView', 'views/patient/PatientFormView', 'views/patient/PatientProfileView',
+    'views/user/UserListView', 'views/user/UserFormView', 'views/user/LoginFormView'],
+    function (App, Backbone, Marionette, $, User, Users, Patient, Patients,
+              WelcomeView, DesktopHeaderView, PatientListView, PatientFormView, PatientProfileView,
+              UserListView, UserFormView, LoginFormView) {
 
         return Backbone.Marionette.Controller.extend({
             initialize:function (options) {
@@ -105,13 +109,13 @@ define(['App', 'backbone', 'marionette', 'jquery', 'views/WelcomeView',
 
             patientForm: function(){
                 //fetch patients collection
-                var patients = new Patient.Collection([]);
-                var patientList = new Patient.Views.PatientListView({
+                var patients = new Patients([]);
+                var patientList = new PatientListView({
                     model: patients
                 });
                 patients.fetch({update: true});
 
-                var form = new Patient.Views.PatientFormView({
+                var form = new PatientFormView({
                     collection: patients
                 });
 
@@ -120,27 +124,28 @@ define(['App', 'backbone', 'marionette', 'jquery', 'views/WelcomeView',
                     form.render();
                 }, this);
 
-                var layout = app.useLayout("layouts/admin");
-
-                layout.removeView();
-
-                layout.setViews({
-                    "#admin-collection-list": patientList,
-                    "#admin-edit-content": form
-                }).render().then(function(){
-                    layout.$("#patients-admin").parent().addClass("active");
-                });
+//                var layout = app.useLayout("layouts/admin");
+//
+//                layout.removeView();
+//
+//                layout.setViews({
+//                    "#admin-collection-list": patientList,
+//                    "#admin-edit-content": form
+//                }).render().then(function(){
+//                    layout.$("#patients-admin").parent().addClass("active");
+//                });
             },
 
             usersForm: function(){
+                console.log("In usersForm");
                 //fetch users collection
-                var users = new User.Collection([]);
-                var userList = new User.Views.UserListView({
+                var users = new Users([]);
+                var userList = new UserListView({
                     model: users
                 });
                 users.fetch({update: true});
 
-                var form = new User.Views.UserFormView({
+                var form = new UserFormView({
                     collection: users
                 });
 
@@ -149,16 +154,18 @@ define(['App', 'backbone', 'marionette', 'jquery', 'views/WelcomeView',
                     form.render();
                 }, this);
 
-                var layout = app.useLayout("layouts/admin");
 
-                layout.removeView();
 
-                layout.setViews({
-                    "#admin-collection-list": userList,
-                    "#admin-edit-content": form
-                }).render().then(function(){
-                    layout.$("#users-admin").parent().addClass("active");
-                });
+//                var layout = app.useLayout("layouts/admin");
+//
+//                layout.removeView();
+//
+//                layout.setViews({
+//                    "#admin-collection-list": userList,
+//                    "#admin-edit-content": form
+//                }).render().then(function(){
+//                    layout.$("#users-admin").parent().addClass("active");
+//                });
             }
         });
     }

@@ -12,6 +12,7 @@ require.config({
         "marionette":"../libs/backbone.marionette",
         "handlebars":"../libs/handlebars",
         "hbs":"../libs/hbs",
+        "moment":"../libs/moment",
         "i18nprecompile":"../libs/i18nprecompile",
         "json2":"../libs/json2",
         "jasmine": "../libs/jasmine",

@@ -1,0 +1,39 @@
+<form class="form-horizontal">
+    <div class="control-group">
+        <label class="control-label" for="email">Email:</label>
+
+        <div class="controls">
+            <input type="text" id="email" name="email" placeholder="Email" value="{{email}}">
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label" for="password">Password:</label>
+
+        <div class="controls">
+            <input type="password" id="password" name="password" placeholder="Password" value="{{password}}"/>
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label">Role:</label>
+
+        <div class="controls">
+            <select id="role" name="role">
+                <option value="1" {{#if isSuperUser}}selected="selected"{{/if}}>
+                    Super User
+                </option>
+                <option value="2" {{#if isPatient}}selected="selected"{{/if}}>
+                    Patient
+                </option>
+            </select>
+        </div>
+    </div>
+
+    <div class="control-group">
+        <div class="controls">
+            <button type="button" class="btn btn-success new"><i class="icon-plus icon-white"></i> New</button>
+            <button type="submit" class="btn btn-primary save" data-loading-text="Saving...">Save</button>
+        </div>
+    </div>
+
+    <input type="hidden" name="_id" value="{{_id}}"/>
+</form>

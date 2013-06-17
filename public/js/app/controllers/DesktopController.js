@@ -9,7 +9,11 @@ define(['App', 'backbone', 'marionette', 'jquery', 'models/User', 'collections/U
 
         return Backbone.Marionette.Controller.extend({
             initialize:function (options) {
-                App.headerRegion.show(new DesktopHeaderView());
+                var headerView = new DesktopHeaderView();
+                App.headerRegion.show(headerView);
+                App.vent.on("session", function(user){
+                    headerView.user(user);
+                }, this);
 
                 var that = this;
                 this.sessionCheck(function(user){
@@ -19,14 +23,8 @@ define(['App', 'backbone', 'marionette', 'jquery', 'models/User', 'collections/U
                     } else {
                         that.login();
                     }
+                    App.vent.trigger("session", user);
                 });
-
-    //            app.layout.on("afterRender", function(){
-    //                //hide elements the session user should not see
-    //                if (app.user && app.user.get("role") == 1) {
-    //                    app.layout.$(".role-1").show();
-    //                }
-    //            }, this);
 
             },
 
@@ -102,6 +100,7 @@ define(['App', 'backbone', 'marionette', 'jquery', 'models/User', 'collections/U
 
                 loginFormView.on("login", function (user) {
                     App.user = new User(user);
+                    App.vent.trigger("session", App.user);
                     console.log("Logged in user: ", App.user.toJSON());
                     App.appRouter.navigate("", {trigger: true});
                 }, this);
@@ -130,6 +129,7 @@ define(['App', 'backbone', 'marionette', 'jquery', 'models/User', 'collections/U
 
                 layout.listItems.show(patientList);
                 layout.detail.show(form);
+                layout.setActiveTab("patients");
             },
 
             usersForm: function(){
@@ -156,6 +156,7 @@ define(['App', 'backbone', 'marionette', 'jquery', 'models/User', 'collections/U
 
                 layout.detail.show(form);
                 layout.listItems.show(userList);
+                layout.setActiveTab("users");
             }
         });
     }

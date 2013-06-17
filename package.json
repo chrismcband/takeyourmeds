@@ -2,7 +2,7 @@
     "name": "takeyourmeds",
     "title": "Take Your Meds",
     "description": "A reminder service for taking your medicine. Phones you to remind to take your medication.",
-    "version": "0.0.0-9",
+    "version": "0.0.1",
     "repository":{
         "type":"git",
         "url":"git@github.com:chrismcband/takeyourmeds.git"

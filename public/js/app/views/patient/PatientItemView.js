@@ -3,10 +3,14 @@ define(['backbone', 'hbs!templates/patient/item', 'marionette'], function(Backbo
         tagName: 'tr',
         template: template,
         events: {
-            "click": "select"
+            "click": "select",
+            "click button.delete": "deletePatient"
         },
         modelEvents: {
             "change:selected": "selectedChanged"
+        },
+        deletePatient: function(){
+            this.model.destroy({wait: true});
         },
         select: function(){
             this.model.set("selected", true);

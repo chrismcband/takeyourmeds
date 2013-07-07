@@ -51,6 +51,7 @@ define(['backbone', 'moment', 'models/Drug', 'hbs!templates/drug/form', 'marione
             },
             create: function(e){
                 this.$("form input").val("");
+                this.$("button.save").button("reset");
                 this.model = new Drug();
             },
             serializeData: function(){

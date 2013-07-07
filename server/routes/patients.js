@@ -124,6 +124,7 @@ exports.put = function(req, res) {
             console.log("Unable to update patient", err);
         }
 
+
         db.Patient.findOne({_id: id}).populate('courses').exec(function(err, patient){
             if (err){
                 console.log("Unable to find updated patient", err);
@@ -132,15 +133,33 @@ exports.put = function(req, res) {
             var count = 0;
             patient = patient.toObject();
 
-            __(patient.courses).each(function(course){
-                db.Drug.findOne({_id: course.drug}, function(err, drug){
-                    patient.courses[count].drug = drug;
-                    count++;
-                    if (count == patient.courses.length) {
-                        res.send(patient);
-                    }
+            console.log("Patient: "+patient.courses.length);
+            if (patient.courses.length > 0) {
+                __(patient.courses).each(function(course){
+                    db.Drug.findOne({_id: course.drug}, function(err, drug){
+                        patient.courses[count].drug = drug;
+                        count++;
+                        if (count == patient.courses.length) {
+                            res.send(patient);
+                        }
+                    });
                 });
-            });
+            } else {
+                res.send(patient);
+            }
+
         });
     });
 };
+
+exports.delete = function(req, res) {
+    var id = req.params.id;
+
+    db.Patient.remove({_id: id}, function(err){
+        if (err){
+            console.log("Unable to delete patient");
+        }
+        //send id as json string
+        res.send('"'+id+'"');
+    });
+}

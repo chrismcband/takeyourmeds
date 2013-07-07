@@ -1,4 +1,4 @@
-define(['backbone', 'hbs!templates/user/form', 'marionette'], function(Backbone, template){
+define(['backbone', 'models/User', 'hbs!templates/user/form', 'marionette'], function(Backbone, User, template){
     var UserFormView = Backbone.Marionette.ItemView.extend({
         template: template,
         events: {
@@ -48,6 +48,8 @@ define(['backbone', 'hbs!templates/user/form', 'marionette'], function(Backbone,
         },
         newUser: function(e){
             this.$("form input").val("");
+            this.$("button.save").button("reset");
+            this.model = new User();
         },
         serializeData: function(){
             var data = this.model ? this.model.toJSON() : {};

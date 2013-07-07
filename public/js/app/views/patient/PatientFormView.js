@@ -51,6 +51,7 @@ define(['backbone', 'moment', 'models/Patient', 'hbs!templates/patient/form', 'm
             },
             newPatient: function(e){
                 this.$("form input").val("");
+                this.$("button.save").button("reset");
                 this.model = new Patient();
             },
             serializeData: function(){

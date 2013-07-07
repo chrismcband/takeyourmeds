@@ -49,6 +49,7 @@ app.get('/api/patients', patients.get);
 app.get('/api/patients/:id', patients.getOne);
 app.post('/api/patients', patients.post);
 app.put('/api/patients/:id', patients.put);
+app.delete('/api/patients/:id', patients.delete);
 app.get('/api/drugs', drugs.get);
 app.get('/api/drugs/:id', drugs.getOne);
 app.post('/api/drugs', drugs.post);

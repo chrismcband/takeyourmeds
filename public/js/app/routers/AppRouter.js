@@ -5,7 +5,8 @@ define(['backbone', 'marionette'], function(Backbone, Marionette) {
            "": "index",
            "login": "login",
            "admin/patients": "patientForm",
-           "admin/users": "usersForm"
+           "admin/users": "usersForm",
+           "admin/drugs": "drugsForm"
        },
    });
 });

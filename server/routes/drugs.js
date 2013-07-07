@@ -56,3 +56,15 @@ exports.put = function(req, res) {
         res.send(drug);
     });
 };
+
+exports.delete = function(req, res) {
+    var id = req.params.id;
+
+    db.Drug.remove({_id: id}, function(err){
+        if (err){
+            console.log("Unable to delete drug");
+        }
+        //send id as json string
+        res.send('"'+id+'"');
+    });
+}

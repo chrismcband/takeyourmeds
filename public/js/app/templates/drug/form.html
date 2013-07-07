@@ -1,0 +1,48 @@
+<form class="form-horizontal">
+    <div class="control-group">
+        <label class="control-label" for="drugname">Drug name:</label>
+
+        <div class="controls">
+            <input type="text" id="drugname" name="name" placeholder="Drug name" value="{{name}}">
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label" for="drugdescription">Description:</label>
+
+        <div class="controls">
+            <input type="text" id="drugdescription" name="description" placeholder="Drug description" value="{{description}}"/>
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label">Dosage in MG:</label>
+
+        <div class="controls">
+            <input type="number" name="dosageInMG" value="{{dosageInMG}}"/>
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label">Drug format:</label>
+
+        <div class="controls">
+            <select name="type">
+                {{#select type}}
+                    <option value="pill">Pill</option>
+                    <option value="capsule">Capsule</option>
+                    <option value="liquid">Liquid</option>
+                    <option value="injectable">Injectable</option>
+                    <option value="spray">Spray</option>
+                    <option value="aerosol">Aerosol</option>
+                {{/select}}
+            </select>
+        </div>
+    </div>
+
+    <div class="control-group">
+        <div class="controls">
+            <button type="button" class="btn btn-success new"><i class="icon-plus icon-white"></i> New</button>
+            <button type="submit" class="btn btn-primary save" data-loading-text="Saving...">Save</button>
+        </div>
+    </div>
+
+    <input type="hidden" name="_id" value="{{_id}}"/>
+</form>

@@ -1,12 +1,12 @@
-define(['backbone', 'moment', 'models/Patient', 'hbs!templates/patient/form', 'marionette'],
-    function(Backbone, moment, Patient, template){
-        var PatientFormView = Backbone.Marionette.ItemView.extend({
+define(['backbone', 'moment', 'models/Drug', 'hbs!templates/drug/form', 'marionette'],
+    function(Backbone, moment, Drug, template){
+        var DrugFormView = Backbone.Marionette.ItemView.extend({
             template: template,
             events: {
-                "submit form": "savePatient",
-                "click button.new": "newPatient"
+                "submit form": "save",
+                "click button.new": "create"
             },
-            savePatient: function(e){
+            save: function(e){
                 //set save button to loading state
                 var $saveButton = this.$("button.save");
                 $saveButton.button("loading");
@@ -16,7 +16,7 @@ define(['backbone', 'moment', 'models/Patient', 'hbs!templates/patient/form', 'm
                 _(dataArray).each(function(d){
                     data[d.name] = d.value;
                 });
-                data.dob = moment(data.dob, "YYYY-MM-DD").unix();
+                //delete id field if empty to invoke post instead of put
                 if (data._id == "") {
                     delete data._id;
                 }
@@ -49,20 +49,17 @@ define(['backbone', 'moment', 'models/Patient', 'hbs!templates/patient/form', 'm
 
                 return false;
             },
-            newPatient: function(e){
+            create: function(e){
                 this.$("form input").val("");
-                this.model = new Patient();
+                this.model = new Drug();
             },
             serializeData: function(){
                 var data = this.model ? this.model.toJSON() : {};
-                //format dob so date input field displays correctly
-                data.dobFormatted = moment.unix(data.dob).format("YYYY-MM-DD");
-                data.isMale = data.gender == "male";
 
                 return data;
             }
         });
 
-        return PatientFormView;
+        return DrugFormView;
     }
 );

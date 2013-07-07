@@ -1,10 +1,12 @@
 define(['App', 'backbone', 'marionette', 'jquery', 'models/User', 'collections/Users',
-    'models/Patient', 'collections/Patients',
+    'models/Patient', 'collections/Patients', 'models/Drug', 'collections/Drugs',
     'views/WelcomeView', 'views/DesktopHeaderView',
     'views/patient/PatientListView', 'views/patient/PatientFormView', 'views/patient/PatientProfileView',
-    'views/user/UserListView', 'views/user/UserFormView', 'views/user/LoginFormView', 'views/layout/AdminLayout'],
-    function (App, Backbone, Marionette, $, User, Users, Patient, Patients,
+    'views/drug/DrugListView', 'views/drug/DrugFormView', 'views/user/UserListView', 'views/user/UserFormView',
+    'views/user/LoginFormView', 'views/layout/AdminLayout'],
+    function (App, Backbone, Marionette, $, User, Users, Patient, Patients, Drug, Drugs,
               WelcomeView, DesktopHeaderView, PatientListView, PatientFormView, PatientProfileView,
+              DrugListView, DrugFormView,
               UserListView, UserFormView, LoginFormView, AdminLayout) {
 
         return Backbone.Marionette.Controller.extend({
@@ -157,6 +159,33 @@ define(['App', 'backbone', 'marionette', 'jquery', 'models/User', 'collections/U
                 layout.detail.show(form);
                 layout.listItems.show(userList);
                 layout.setActiveTab("users");
+            },
+
+            drugsForm: function(){
+                //use the admin layout for content
+                var layout = new AdminLayout();
+                layout.render();
+                App.mainRegion.show(layout);
+
+                //fetch drugs collection
+                var drugs = new Drugs([]);
+                var drugList = new DrugListView({
+                    collection: drugs
+                });
+                drugs.fetch({add: true});
+
+                var form = new DrugFormView({
+                    collection: drugs
+                });
+
+                drugList.on("itemSelected", function(drug){
+                    form.model = drug;
+                    form.render();
+                });
+
+                layout.detail.show(form);
+                layout.listItems.show(drugList);
+                layout.setActiveTab("drugs");
             }
         });
     }

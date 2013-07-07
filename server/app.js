@@ -53,6 +53,7 @@ app.get('/api/drugs', drugs.get);
 app.get('/api/drugs/:id', drugs.getOne);
 app.post('/api/drugs', drugs.post);
 app.put('/api/drugs/:id', drugs.put);
+app.delete('/api/drugs/:id', drugs.delete);
 app.get('/api/courses', courses.get);
 app.get('/api/courses/:id', courses.getOne);
 app.post('/api/courses', courses.post);

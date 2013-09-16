@@ -6,12 +6,15 @@ Reminds people to take their medication.
 # Installation
 
 ## Prerequisites
+
 1. Working node installation
 2. Working mongodb installation (follow relevant guide from http://docs.mongodb.org/manual/installation/)
 3. Nodejitsu account (or other node + mongodb hosting solution, must have an accessible internet url in order for twilio to work. Sign up for nodejitsu at https://www.nodejitsu.com/)
 
 ## Set up
+
 Assuming you have installed node and mongodb correctly and can execute the `node` command and have a mongodb daemon running (try running the command line `mongo` client, if that doesn't work, try starting the daemon `mongod`)
+
 1. Install npm packages. At project root directory run `npm install`.
 2. Make sure the mongodb daemon is running (try using the command line `mongo` client, if that fails start the daemon using `mongod` or `sudo service mongodb start` on ubunu.
 3. In project directory run `node express/install.js`, this interactive script tells you it will install some base dummy data to get your started. Press enter when asked.

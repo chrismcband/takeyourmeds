@@ -4,4 +4,4 @@ define(['backbone', 'hbs!templates/course-itinerary', 'marionette'], function(Ba
     });
 
     return CourseItemView;
-})
+});

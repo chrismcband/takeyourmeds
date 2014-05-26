@@ -15,7 +15,7 @@ var express = require('express')
     , twilio = require('./routes/twilio')
     , http = require('http')
     , path = require('path')
-    , port = 8080
+    , port = process.env.PORT || 8080
     , url  = 'http://localhost:' + port + '/';
 /* We can access nodejitsu enviroment variables from process.env */
 /* Note: the SUBDOMAIN variable will always be defined for a nodejitsu app */
@@ -26,7 +26,7 @@ store  = new express.session.MemoryStore;
 var app = express();
 
 app.configure(function(){
-  app.set('port', process.env.PORT || port);
+  app.set('port', port);
   app.set('views', __dirname + '/views');
   app.set('view engine', 'jade');
   app.use(express.favicon());
@@ -36,7 +36,7 @@ app.configure(function(){
   app.use(express.cookieParser('your secret here'));
   app.use(express.session());
   app.use(app.router);
-  app.use(express.static(path.join(__dirname, '/../public')));
+  app.use(express.static(path.join(__dirname, 'public')));
 });
 
 app.configure('development', function(){

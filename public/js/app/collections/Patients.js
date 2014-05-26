@@ -8,4 +8,4 @@ define(['backbone', 'models/Patient'], function(Backbone, Patient){
     });
 
     return Patients;
-})
+});

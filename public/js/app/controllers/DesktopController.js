@@ -49,7 +49,9 @@ define(['App', 'backbone', 'marionette', 'jquery', 'models/User', 'collections/U
                 if (!App.user){
                     this.on("session", function(user){
                         this.index();
-                    }, this)
+                    }, this);
+                    //redirect to login
+                    App.appRouter.navigate("/login", {trigger: true, replace: true});
                     return;
                 }
                 if (!App.user.isAuth()) {
@@ -59,7 +61,7 @@ define(['App', 'backbone', 'marionette', 'jquery', 'models/User', 'collections/U
                 }
 
                 var patient = new Patient({
-                    _id: '51465d91acc9f0fd07000002'
+                    _id: '538345ba113fc1ac1b000002'
                 });
 
                 var patientView = new PatientProfileView({

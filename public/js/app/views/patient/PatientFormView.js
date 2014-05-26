@@ -17,7 +17,7 @@ define(['backbone', 'moment', 'models/Patient', 'hbs!templates/patient/form', 'm
                     data[d.name] = d.value;
                 });
                 data.dob = moment(data.dob, "YYYY-MM-DD").unix();
-                if (data._id == "") {
+                if (data._id === "") {
                     delete data._id;
                 }
 

@@ -27,7 +27,7 @@ exports.post = function(req, res){
             res.send(user);
 //            res.end();
         } else {
-            res.end('Invalid credentials');
+            res.send(401, 'Invalid credentials');
         }
     });
 };

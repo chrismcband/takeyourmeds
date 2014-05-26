@@ -46,7 +46,7 @@ exports.getOne = function(req, res){
 
     db.Patient.findOne({_id: id}).populate('courses').exec(function(err, patient){
         if (err){
-            console.log("Unable to find patient "+id);
+            console.log("Unable to find patient "+id, err);
         }
         if (patient) {
             var count = 0;

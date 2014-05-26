@@ -4,4 +4,4 @@ define(['backbone', 'views/CourseItemView', 'marionette'], function(Backbone, Co
     });
 
     return CourseListView;
-})
+});

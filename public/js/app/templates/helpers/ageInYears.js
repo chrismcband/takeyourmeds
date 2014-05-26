@@ -11,4 +11,4 @@ define(['handlebars'], function(Handlebars){
     Handlebars.registerHelper('ageInYears', ageInYears);
 
     return ageInYears;
-})
+});

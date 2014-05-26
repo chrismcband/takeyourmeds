@@ -11,4 +11,4 @@ define(['handlebars', 'moment'], function(Handlebars, moment){
 
     Handlebars.registerHelper('numDays', numDays);
     return numDays;
-})
+});

@@ -11,6 +11,11 @@ define(['jquery', 'backbone', 'hbs!templates/user/login', 'marionette'], functio
                     data: this.$("form").serialize(),
                     success: function(response){
                         that.trigger("login", response);
+                    },
+                    statusCode: {
+                        401: function(response) {
+                          console.log(response);
+                        }
                     }
                 });
 

@@ -18,7 +18,7 @@ define(['backbone', 'models/User', 'hbs!templates/user/form', 'marionette'], fun
             _(dataArray).each(function(d){
                 data[d.name] = d.value;
             });
-            if (data._id == "") {
+            if (data._id === "") {
                 delete data._id;
             }
 

@@ -37,4 +37,4 @@ define(['backbone', 'hbs!templates/user/item', 'marionette'], function(Backbone,
     });
 
     return UserItemView;
-})
+});
